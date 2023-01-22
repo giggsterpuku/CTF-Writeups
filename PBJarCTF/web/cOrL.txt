@@ -1,0 +1,31 @@
+################################# Write-Up #####################################
+
+Challenge: cOrL
+Category: web
+Description: Descriptions are hard give me a break. (Think of common usernames and passwords for admin) Link: http://147.182.172.217:42003/ 
+Author: ZeroDayTea
+
+The main goal of the chall according to the author is to learn about HTTP
+requests. So the chall name suggests that you use the curl Linux tool, which is
+basically a terminal way of interacting with a webpage. You can use it to send
+HTTP requests and grab HTML source code/responses. So, I first learned that
+the -X parameter of curl allows you to specify what request to give to your
+target website, so I used it to get a POST request. Next, I learned that you
+could specify fields to include for the website's input using -d. With that,
+I started by sending a POST request to the site. Along with the request, I
+added the fields username and password (you can see them in the input type
+fields in the HTML source code or just running curl on the site without
+arguments) and put in values like so: username=<username>&password=<password>.
+After jamming more POST requests with different input in the fields, I found
+a username admin and password admin worked, but in the response, it said that
+"the admin must have <strong>put</strong> some additional security protections
+here," emphasis on the word puts. The hint there was to use a PUT request
+instead of POST, so I changed it to that and go the flag. For reference, a
+POST requests sends information and does not expect to get anything back from
+it. A PUT request actually updates the site with the information you give it.
+Here's my winning payload: curl -d "username=admin&password=admin" -X PUT http://147.182.172.217:42003/
+
+Flag: flag{HTTP_r3qu35t_m3th0d5_ftw}
+Points: 258 (at time of solve)
+Solved by: Ryan Nguyen
+Solved at: 33 hrs into comp

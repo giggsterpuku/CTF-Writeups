@@ -1,0 +1,2 @@
+Discord: CTFUA{Y0uR_F1rSt_Fl4g_Gj} - 0 pts D:
+Jump King: CTFUA{Jump1ng_Ar0und_w1Th_aSlR}; b0f on flag var and vuln addr - 132 pts at time of solve

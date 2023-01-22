@@ -1,0 +1,10 @@
+Challenge: unpuzzled3
+Category: Forensics
+Description: THIS IS AN OSINT CHALLENGE unpuzzler7#6451 is back! I've heard that he's been listening to a lot of music lately. Think that you might be able to find something? (To access this challenge you must join our discord server at https://discord.gg/ctf)
+
+Really just took a long while to think about, but the flag is to basically take the first letter in every single song in unpuzzler7's More Cool Songs
+playlist. The way I though of it was because I remembered an old 2018 picoCTF crypto chall that was similar to it except you used the first letters
+of the locations of the GPS coordinates given in the "ciphertext".
+
+Flag: ictf{spotify_jammmmmm_78d5b4}
+Solved by giggsterpuku 23 hrs in

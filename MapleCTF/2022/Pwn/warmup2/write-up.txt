@@ -1,0 +1,27 @@
+Challenge: warmup2
+Category: Pwn
+Description: It's like warmup1, but harder. nc warmup2.ctf.maplebacon.org 1337
+
+The solution script does not work locally for some reason, but theoretically assuming no errors it should work on the remote server and crack a
+shell. warmup1's exploit has to deal with using partial overwrites to bypass PIE to make a ret2win attack. warmup2 builds off of that and adds a
+ret2libc component. Looking at main(), it invokes vuln() where there are 2 read() instructions that allow you to write in the 264-byte buffer and
+more, suggesting a buffer overflow attack. Like warmup1, it implements Full RELRO, NX, and PIE, but this time it also implements a stack canary, so
+it gets harder to make a buffer overflow. Messing around, I tried just inputting just 264 "a"s for the buffer size plus one extra byte to see if the
+program crashes immediately. Instead, it doesn't, and it ends up leaking the the last 7 bytes of the canary (first byte is a null byte, which I
+ended up overwriting with the extra byte) and a stack address (rbp). Turns out that printf(), the function used to print out your input, reads until
+it reaches a null byte. Since I overwrote the first byte in the canary, printf() continued reading past it, thus leaking the extra information. The
+stack canary check is not done until the second printf() is called in vuln(), so the program doesn't crash just yet. So, with the second read(), I
+made a partial overwrite, using the canary leaked, to go back to a call instruction in main calling vuln() since retruning to main() makes a stack
+misalignment. With that, I get to keep the process running the binary alive so that it doesn't close out (if it did, the canary and addresses would
+be scrambled up again). By the way, the 3rd-least-significant nibble of the instruction pointer happened to be the same one for the offset of the
+call instruction, so I just overwrote one byte on the instruction pointer. Reusing the first read of the vuln() function I invoked in the previous
+payload, I overwrote the buffer, canary, and rbp with "a"s to leak a the address of an instruction in main, using the aforementioned printf()
+behavior and late canary check to my advantage. With that, the rest was the what I knew: ret2libc. Calculate base address, leak the GOT address of
+a function (in this case puts() like usual), find the libc file that has the offset for the GOT entry of puts(), calculate the address of system()
+and '/bin/sh', and lastly ROP to a shell.
+
+P.S. I tried learning to automate the process of finding offsets and the libc file using pwntools and sgtlibc, which seem to work well. Just that the
+binary crashes any. Again, I do not know why. :(
+
+
+Reviwed by giggsterpuku

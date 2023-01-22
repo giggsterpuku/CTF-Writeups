@@ -1,0 +1,29 @@
+################################### Write-Up ###################################
+
+Challenge: ProgrammersHateProgramming 2
+Category: web
+Description: oh noes now there are more filters :(( Link: http://147.182.172.217:42007/
+Author: ZeroDayTea
+
+It was a lot like ProgrammersHateProgramming chall, but this time the payloads
+were slightly modified. First there was an additional str_replace_first()
+statement for the string "<?," so I added an extra "<?" into the payloads to
+negate it. In addition, there were several str_replace() statements for PHP/BASH
+cmds like fopen() or cat, so you couldn't put those strings into the payloads.
+I coudl still use "find / flag" with the PHP cmd system(), so I used it to find
+the location of the flag (same as the prev chall). Then, I tried to output the
+contents of the file with the "echo" BASH cmd, but it didn't work since the
+output went to a terminal. So, I discovered a workaround with the str_replace()
+statements. I found that if I were to place pieces of a string that represented
+a valid cmd away from each other and have a prohibited keyword mentioned in
+the str_replace() statements in between them, the PHP program would remove the
+keyword and stitch the fragmented cmd together and not remove it so that it runs
+the fragmented cmd. I changed the "cat" string in my prev payload and rewrote it
+as "ccatat" to bypass the str_replace(). Here is my payload:
+<?<?phpflag?> <?php system("find / flag") ?>
+<?<?phpflag?> <?php system("echo $(</flag.php)") ?>
+
+Flag: flag{wow_that_was_a_lot_of_filters_anyways_how_about_that_meaningful_connection_i_mentioned_earlier_:)} 
+Points: 233 (at time of solve)
+Solved by: Ryan Nguyen
+Solved at: 58 hours into comp (2 hrs left)

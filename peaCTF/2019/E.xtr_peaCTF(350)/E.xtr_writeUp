@@ -1,0 +1,9 @@
+!#/bin/bash
+
+file E.xtr # Shows that it is data
+strings E.xtr # Had lines like IDHR, sRGB... must be a PNG with a messed up
+# File signature
+hexedit E.xtr # Changed three hex numbers after first one to 50 4E 47 to
+# create PNG file signature; saved it
+eog E.xtr # In the picture is the flag: {read_banned_it}
+ 

@@ -1,0 +1,22 @@
+Challenge: warmup1
+Category: Pwn
+Description:
+
+Honestly to me this was not warm-up, but it was some challenge that I learned from for sure. Looking at the binary protections, PIE, NX, and Full
+RELRO are deployed. I took the time to review what each protection was, but the one in particular that I had to focus on this chall was PIE, or
+Position Independent Executables. Basically, the binary is compiled so that when you look at it statically without running it at first, the addresses
+of the code are actually just offsets, and when the code runs, it basically is ASLR implemented, messing up all the addresses each time it runs.
+However, 3 of the least significant nibbles (fyi nibble is 4 bits) remain unchanged. This is important for the exploit I used to solve the chall
+later on. At first, I thought of getting a leak like how I usually get on for a ret2libc attack, but there were no output functions I could use, and
+even if there were, there was no way I could get the right addresses because again, PIE messes up all the addresses, including the GOT and PLT.
+Looking up a few write-ups of previous challenges and pwn.college for bypassing PIE, I found the best play was to use a partial overwrite. The
+technique only requires that you overwrite just some, but not all of a location of memory that you can write to so that you can get control of the
+program flow. Going back to the nibbles idea I mentioned earlier, what I found I could do was partially overwrite the instruction pointer because it
+loads up an intruction from the stack (where the win function lies) and using the offset I saw when statically analyzing the binary, I would use it
+to overwrite just 2 bytes of the pointer. The tricky thing was that the most significant first nibble changes, so what I had to do was keep trying
+just one nibble (could be any value) over and over until the binary accepted it and went to the win function. With that, after some painful
+debugging of my exploit, I got my flag. Woop Woop!
+
+Flag: maple{buwuffer_owoverflow_UwU}
+Solved by giggsterpuku 1 day in
+

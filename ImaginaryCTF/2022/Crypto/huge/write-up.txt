@@ -1,0 +1,12 @@
+Challenge: huge
+Category: Crypto
+Description: Huge primes = huge security
+
+I kind of scratched the surface of how to solve this chall in the Not Baby chall in last year's PBJarCTF. This chall was obv RSA, but the unusual
+thing I did find is that from the source and putting the n value in factordb, there were multiple factors that made up n, so the traditional solving
+for the Charmichael totient (really just the Euler totient b/c there were two prime numbers for traditional RSA) was not going to work. I read
+through some articles and hard coded the general solutions to finding the Charmicheal totients for ANY number (not just a number composed of 2
+primes), which you can find in the crack.py script.
+
+Flag: ictf{sm4ll_pr1mes_are_n0_n0_9b129443}
+Solved for review by giggsterpuku

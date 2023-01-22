@@ -1,0 +1,32 @@
+Points: 3
+Prompt: Daddy told me about cool MD5 hash collision today.
+I wanna do something like that too!
+ssh col@pwnable.kr -p2222 (pw:guest)
+
+If first looked up what an MD5 hash collision is, and I found that it
+is a condition where two files have the same MD5 hash. This can be bad
+since hashes are meant to distinguish files from each other, and the
+collision breaks this rule. Hash collisions allow hackers to pass 
+mailicious cod einto the system so that it can execute it. Looking at
+the source code, I saw that the program first checks for a string input.
+Then, it passes through a check_password function that seems to take every
+4 bytes of the string as hex and add them to the next 4, and it repeats 5
+more times until you end up with your final four bytes. Those 
+resultant bytes are then compared to a hashcode (0x21DD09EC), and if they
+are the same, the flag is outputted. So I first tried inputting raw data 
+(python -c "\x21\xdd\x09\xec\x0\x0\x0\x0\x0\x0\x0\x0\x0\x0\x0\x0\x0\x0\x0
+\x0"). However, it did not work, and the output said to input 20 bytes, 
+which I already did. Later on I learned in a Youtube walkthrough by Adam 
+Doupe that the way C language interprets the end of a string is with a 
+null byte (x00), which explains the error of not having 20 bytes. So, I
+instead turned those x00 bytes into x01 bytes, and know those add up to
+the resultant bytes, I subtractes x4 from each of the bytes in the
+hashcode to get the last 4 bytes of the inputted string. The final
+input I generated was 
+"`python -c "print '\x01'*16 + '\xe8\x05\xd9\x1d'"`"
+and it worked (I also forgot about endianess, so yeah it's in little 
+endian). So as a takeaway, the challnge was not really about an MD5 hash 
+collision, but it was mainly about figuring out the "hashing" algorithm 
+that gets you the collision.
+
+Flag: daddy! I just managed to create a hash collision :)

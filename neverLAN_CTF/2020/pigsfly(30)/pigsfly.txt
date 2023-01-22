@@ -1,0 +1,5 @@
+Look into the image first
+Realize that as the name suggests, it is a cipherwith the name pig associated
+ with it
+The cipher is Pig Pen
+Flag: flag{d0wn_and_d1r7y}

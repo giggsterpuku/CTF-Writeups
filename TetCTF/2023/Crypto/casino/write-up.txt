@@ -1,0 +1,22 @@
+Challenge: casino
+Category: Crypto
+Description:
+
+This chall gave a the fattest feeling of shame after learning what the exploit of the chall was. Looking though all the
+.go files given in the chall, it seems that you can only submit stringified JSON data to the service, and you can only
+invoke 4 commands with it: PrintFlag() from the FlagSeller structure and ShowBalanceWithProof(), Bet(), and Register()
+from the Casino structure. I though of a couple ways to exploit the program, but they ended up being unfeasible. The
+first idea I had was that the seed generation was given to me, so I could just make pseudorandom number with the same
+seed if I made a Go program to do that for me. However, I realized that the seed was randomized by a cryptographically
+secure number generator from the crypto/rand package in Go, so that could not work. The second thing I thought of was
+to take the proof given to me in ShowBalanceWithProof() and manipulate it so that the balance value might be different,
+but I realize that was futile because there was a VerifyItem() function in PrintFlag() that checked if the username and
+balance I supplied with the command in the JSON data were actually hashed into the memory of the program, so that was
+also out of the window. When I asked on the CTF Discord what the exploit was, it ended up being really simple. The key
+was that if you look in the Bet() function, there is no check on giving negative values to wager in the number guessing
+process, so if you "lost" a bet and you supplied a negative amount to wager, you actually increase your balance! Finding
+myself extremely baffled at my stupiditiy for not paying attention to this detail, I ended up getting a flag from
+supplying a substantially large negative number to bet and printing the flag.
+
+Flag: TetCTF{fr0m_n3g4t1v3n3ss_t0_b4nkruptcy}
+Reviewed by giggsterpuku

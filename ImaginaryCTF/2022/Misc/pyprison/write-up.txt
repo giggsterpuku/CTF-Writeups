@@ -1,0 +1,14 @@
+Challenge: pyprison
+Category: Misc
+Description: What's a CTF without a good, old-fashioned pyjail?
+
+Not a difficult chall, but I just wanted to document my thought process through it. From the main.py file, I noticed that the only characters that
+you could use were all lowercase letters and parentheses only, which threw out the traditional object traversing payloads and obvious typing out
+import os and whatnot. It took me some sleep and some thought to figure out that functions like exec(), eval(), and input can be used instead, and
+I thought it should've went through my head sooner. I realized that I could simply bypass the assertion in main.py by just typing out input(), and
+from there I could write whatever characters I wanted since the assertion wouldn't apply there. I tried running it by itself at first b/c main.py
+ran exec() on whatever you typed in, but I realized that it was just executing input() but not executing what was passed into it. So, I changed the
+payload to be "exec(input())," and the rest is simple: import os and cat a flag.txt.
+
+Flag: ictf{pyprison_more_like_python_as_a_service_12b19a09}
+Reviewed by giggsterpuku after comp

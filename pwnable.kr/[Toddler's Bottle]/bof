@@ -1,0 +1,30 @@
+Points: 5
+Prompt: Nana told me that buffer overflow is one of the most common software 
+vulnerability. Is that true?
+ Download : http://pwnable.kr/bin/bof
+ Download : http://pwnable.kr/bin/bof.c
+ Running at : nc pwnable.kr 9000
+
+First, I interpreted the code on bof.c. The program asks for an input
+in the words "overflow me," suggesting that the vulnerability is a buffer
+overflow attack. The gets() function is called, which definitely confirms
+the vuln since it doesn't limit the bytes of the input to 32 as specified.
+Then, a predefined byte string 0xdeadbeef is compared to another byte string
+0xcafebabe. If the strings are the same, the remote shell will be opened, and
+if not, the program will output "Nah.." Essentially, the goal is to create a
+bof to overwrite the string 0xdeadbeef so that the program can execute the 
+remote shell, which I figured would give us the permissions of the user to 
+look at the contents of the flag file. I initially thought that the number
+of bytes that I needed to overwrite was 40 (32 for input, 4 for ebp, and
+4 for esp since it usually takes 8 bytes to overwite the pointers), but it was
+wrong. However, I was worng, and according to a writeup, the correct number
+of bytes is 52 as you can see on gdb when testing the input. I then adjusted
+my output and piped it into the nc command in the prompt, but then the output
+said "stack smash detected" and would not let me into the remote machine.
+So, I used a trick that LiveOverflow used for the challenge, which was
+to pipe the cat command along with the input. This will keep the session open
+and bypass the notice, and doing this will allow me to cat the flag file. My
+command to get into the shell is as follows: 
+(python -c "print 'a'*52 + '\xbe\xba\xfe\xca'"; cat) | nc pwnable.kr 9000
+
+Flag: daddy, I just pwned a buFFer :)

@@ -1,0 +1,21 @@
+################################## Write-Up ####################################
+# Challenge: Lunar Guesser
+# Category: forens
+# Points: 312
+# Description: We intercepted this message being sent from a strange location. Can you figure out where it's being sent from? Note: The flag is the name of a location. All lowercase letters and words separated by underscores. ex: flag{new_york_city}
+# Author: ZeroDayTea
+#
+# The title name reminded me of the m00nwalk chall in picoCTF 2019, where an
+# image is embedded into ham radio signals, so it gave me the idea to decode
+# the audio file using slow-scan TV (SSTV). Opening the file, the audio just
+# sounds like wierd alien sounds, and looking at the spectometry graphs in
+# Audacity, there was no noticeable patterns. So, I looked into a m00nwalk
+# write-up and learned how to use a software decoder (QSSTV) to decode the
+# audio into an image. The image ended up being the picture of the Apollo 11
+# moon landing, and its location on the Moon was the flag. You can follow the
+# tutorial here to decode the audio file:
+# https://ourcodeworld.com/articles/read/956/how-to-convert-decode-a-slow-scan-television-transmissions-sstv-audio-file-to-images-using-qsstv-in-ubuntu-18-04
+#
+# Flag: flag{mare_tranquillitatis}
+# Solved by: Ryan Nguyen
+# Solved after comp

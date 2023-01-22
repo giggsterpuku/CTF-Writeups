@@ -1,0 +1,14 @@
+Challenge: prime
+Category: crypto
+Description: is it prime? (Remote server: nc challs.wreckctf.com 3127)
+
+Nothing really special about the chall, kind of more like a rev chall but thinking with prime numbers. Looking at the
+script, it seems it has to take 71 inputted numbers in order to get the flag. The first number has two constraints:
+it has to be between 1020 and 1028 bits, and it must be prime. The rest of the 70 numbers are basically compared to each
+other to see if they are coprime (GCD of the two numbers is 1) and that they divide the first number. So, I used a
+script to generate a prime number for the first input and for the other 70 numbers I figured that that prime number
+can only be divisible by 1, so all 70 numbers must be 1. Plus they are technically coprime with each other in the sense
+that their GCDs with each other is 1. Running th script, you get the flag. EZPZ.
+
+Flag: flag{yep_it's_definitely_prime}
+Reviewed by giggsterpuku

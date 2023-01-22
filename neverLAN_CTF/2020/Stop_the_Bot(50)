@@ -1,0 +1,13 @@
+Link: https://challenges.neverlanctf.com:1140
+Ok so the names says bots in it
+This must mean it is referring to security technique with robots.txt
+This file on the website determines what engine crawlers or web robots can
+request for certain pages or files on the site
+These crawler or bots are used to collect intel on websites so ppl can exploit
+then
+Add /robots.txt to the end of the link and refresh
+You should now see three fields (User: *, Disallow: /, and Disallow: flag.txt)
+Well, since there is a * in the User field, anyone can go view those
+directories and files on the system that are prohibited (no very secure, is it?)
+Just go to the original link and add /flag.txt to the end to get the flag
+Flag: flag{n0_b0ts_all0w3d}

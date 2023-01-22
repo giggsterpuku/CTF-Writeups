@@ -1,0 +1,41 @@
+CTF: PBJar CTF (2021)
+Solved by: Ryan Nguyen
+Team Name: My name is Aidan. I like to dance!
+Place: 107/671 in open/college division, 109/892 overall
+
+pwn>
+Ret2Libc (265 pts): ret2libc, duh
+flag{th3_wh0l3_us3l3r4nd_1s_my_pl4ygr0und} (solved after comp)
+Walkthrough (273 pts): b0f to fmtstr(), leak num[4] using %14$llx and input leak
+flag{4nd_s0_th3_3xpl01ts_b3g1n} (solved after comp)
+
+rev>
+polymer (223 pts): strings -> strings ./polymer | grep str (there were a lot of fake "flag{}" strings
+flag{ju5t_4n0th3r_str1ng5_pr0bl3m_0159394921} (Solved 32 hrs into comp)
+web (244 pts): v1 binary downloads next version binary and so on from given link -> find the latest version (I did trial and error with the version #'s and used bren) -> 147.182.172.217:42100/v133791021 -> flag binary and ran it
+flag{h0w_l0ng_wher3_y0u_g0ne_f0r_3910512832} (solved after comp)
+
+crypto>
+convert (107 pts): hex to ascii
+flag{dis_is_a_fl4ggg_h1} (solved 1 hour into comp)
+
+web>
+Hack NASA With HTML Mr. Inspector Sherlock (251 pts): Inspect Element; part 1 in file animate.js, part 2 in href'd file what.html, 3rd part in index.html
+flag{wA1t_a_m1nUt3_I_th0ugh1_sh3l0ck_w2s_a_d3t3ct1iv3????!?!?!} (solved after comp)
+
+forens>
+Stegosaurus stenops (231 pts): Bruteforce steghide password with stegcracker and rockyou.txt (password is snowflake)
+flag{ungulatus_better_than_stenops} (Solved 51 hours into comp)
+
+misc>
+discord plz (1 pt): join PBJar CTF Discord w/ link and check #announcements
+flag{thamks_for_joining_the_disc} (Solved 1 hour into comp)
+miner (283 pts): look up etherscan.io and look up block number
+flag{0xd224ca0c819e8e97ba0136b3b95ceff503b79f53} (Solved 1 hour into comp)
+readFlag1 (301 pts): ropsten.etherscan.io > look into smart contract source code
+flag{etherscan_S0urc3_c0de} (Solved 1 hour into comp) **Sidenote: smart contracts are code that identify Etherum accounts to their respective addresses
+TechLead (235 pts): from given link > contract link > copy creator address > look it up on https://etherscan.io/balancecheck-tool and look at graph
+flag{1.4625790953780384} (Solved 51 hours into comp)
+Survey (1pt): flag{thamks_for_playing_beautiful_people!} (Solved 58 hours into comp)
+MEV (): search for block on Etherscan.io > get last transaction (1st, oldest on in block) made by MEV Bot > Internal Txns (where contracts interact to make tranactions, in this case the MEV Bot and miner's to make the bribe)
+flag{0.009672680170055358} (solved after comp w/ help of N1ghtHawks Writeup)

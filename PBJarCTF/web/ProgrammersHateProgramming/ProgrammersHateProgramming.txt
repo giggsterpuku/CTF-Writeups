@@ -1,0 +1,31 @@
+################################## Write-Up ####################################
+
+Challenge: ProgrammersHateProgramming
+Category: web
+Description: just a little different than normally. Link: http://147.182.172.217:42002/index.php
+Author: ZeroDayTea
+
+In this chall I properly learned how to perform cross site scripting (aka XSS).
+Looking at the website, it seems like a normal site to make notes on, but when
+I looked into the source code, it seems that the notes you make on the website
+are actually .php files, so their contents could be interpreted as code. If you
+clicked on those notes, the code would then be executed and you would see the
+results of the code. Then, using OSINT, I learned how to make code to open
+a flag.txt file, but when I put it into the site and clicked the note it was in,
+the code was missing some parts, like the "flag" in "flag.txt". Looking back at
+the PHP source code, I realized they made a blacklist with str_replace_first(),
+clearing wherever flag, <?php, etc. were at. Then, I realized that the blacklist
+function only clears the first instance of those keywords it targets, so I just
+added those keywords before my code to negate it. I tried clicking my note, and
+this time it worked, but there was not flag.txt. So, I used the PHP system()
+function to locate a flag file (system("find / flag")), and there was a
+/flag.php file. From there, I tailored my payload to read its contents.
+Here are two payloads that work:
+<?phpflag?> <?php $myfile = fopen("/flag.php", "r") or die("Unable to open file!"); echo fread($myfile,filesize("/flag.php")); fclose($myfile); ?>
+<?phpflag?> <?php system("cat /flag.php") ?>
+
+Flag: flag{server_side_php_xss_is_less_known_but_considering_almost_80%_of_websites_use_php_it_is_good_to_know_thank_me_later_i_dont_want_to_stop_typing_this_flagg_is_getting_long_but_i_feel_like_we're_developing_a_really_meaningful_connection}
+Points: 247 (at time of solve)
+Solved by: Ryan Nguyen
+Solved at: 32 hours into comp
+################################################################################

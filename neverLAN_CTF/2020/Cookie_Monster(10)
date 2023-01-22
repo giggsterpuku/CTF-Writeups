@@ -1,0 +1,8 @@
+Link given: https://challenges.neverlanctf.com:1110/
+Hint on site says "He's my favorite Red Guy." -> reference to Elmo from Sesame
+St. for you uncultured non-PBS viewers.
+Go into your online cookie editor and you should find a cookie that says
+Red_Guys_name
+Change the value in it to "Elmo" and you should get the flag.
+Flag: flag{YummyC00k13s}
+

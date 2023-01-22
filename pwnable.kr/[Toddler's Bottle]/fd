@@ -1,0 +1,24 @@
+Points: 1
+Prompt: Mommy! what is a file descriptor in Linux?
+ssh fd@pwnable.kr -p2222 (pw:guest)
+
+I looked to see what were the contents of user fd's home directory, and 
+there were 3 files that stood out: fd, fd.c, and flag. The flag file
+is what we are trying to open to get the flag for the challenge, however
+its contents cannot be shown due to file perms. So, I looked into fd.c 
+since I could read it and found what I needed to do with its corresponding
+executeable. The input (a number) is first taken in, converted into an 
+integer form, and subtracted by 0x1234. Then the system reads the
+resulting number as a file descriptor, which is the indicator used to
+determine the input/output of a program (0 for input, 1 for standard
+output, and 2 for standard error). Lastly, there is some more input 
+taken in, it is compared to the string "LETMEWIN." If both the input and
+string are the same, the flag is outputted. Inferring about the information
+of the fildes, I figured that I needed  the resultant number from the 
+first input to be equal to 0 so that I can add more input to compare to 
+"LETMEWIN." Thus, to get the 0, I inputted the decimal number 4660 to be 
+subracted from 0x1234, its equal in hex form. The program then stalls, 
+signifying that I am prompted for input. I typed in "LETMEWIN," and the 
+program outputted the flag.
+
+Flag: mommy! I think I know what a file descriptor is!!

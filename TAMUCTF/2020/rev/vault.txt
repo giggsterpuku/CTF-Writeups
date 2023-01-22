@@ -1,0 +1,83 @@
+Points: 50 (25 hrs into competition)
+Prompt: <none>
+
+So not going to lie, I felt better about myself after solving this challenge because I redeemed myself from my failure
+in AngstromCTF. So I first ran the program, and the program propted me for a password. Testing to see waht the program does,
+I put in a random password and the program says it's wrong and ends. I then looked into the program with GDB and Ghidra, 
+ands as shown below by the decompiled code, what I found is that the program first deobfuscates the correct password in 
+some wierd function called <deobfuscate> and compares it to your password to see if it matches, and then it will says 
+whether the password is right or wrong. So at first I thought of trying to look at the decompiled <deobfuscate> code to see
+what it does, but then I gave up because it was too hard to parse. Instead, remembering from a CTF video, I decided to run
+the command ltrace, a Linux command that displays library functions in the code while it is running. The idea is that when
+I run it, it will show the C functions along with the parameters put into it. Seeing that the strcmp() function is there,
+I figured that running it will show the deobfuscated password along with the password I put in. I typed into the terminal
+"ltrace ./vault," and when I put in the password, the real password was shown, and fortunately, it was the flag
+
+FYI: These are the functions I decompiled in Ghidra since I thought they were the most important to look at.
+
+undefined8 main(void)
+
+{
+  int iVar1;
+  undefined8 *__s1;
+  char *__s;
+  
+  __s1 = (undefined8 *)malloc(0x1a);
+  *__s1 = 0x7e394c2f38323434;
+  __s1[1] = 0x54834c1f7b783a78;
+  __s1[2] = 0x2f72857884842928;
+  *(undefined2 *)(__s1 + 3) = 0x7667;
+  *(undefined *)((long)__s1 + 0x1a) = 0;
+  deobfuscate(__s1);
+  __s = (char *)malloc(0x1b);
+  printf("%s","Enter password: ");
+  fgets(__s,0x1b,stdin);
+  iVar1 = strcmp((char *)__s1,__s);
+  if (iVar1 == 0) {
+    puts("Correct!  That\'s the password!");
+  }
+  else {
+    puts("Sorry, that isn\'t the right password.");
+  }
+  return 0;
+}
+
+
+char * deobfuscate(char *param_1)
+{
+  char cVar1;
+  int iVar2;
+  size_t sVar3;
+  int local_18;
+  int local_14;
+  int local_10;
+  int local_c;
+  
+  sVar3 = strlen(param_1);
+  iVar2 = (int)sVar3;
+  local_c = 0;
+  while (local_c < iVar2) {
+    cVar1 = param_1[local_c];
+    param_1[local_c] = param_1[(long)local_c + 1];
+    param_1[(long)local_c + 1] = cVar1;
+    local_c = local_c + 2;
+  }
+  local_10 = 0;
+  while (local_10 < iVar2) {
+    param_1[local_10] = param_1[local_10] + -0xf;
+    local_10 = local_10 + 1;
+  }
+  local_14 = 0;
+  while (local_18 = iVar2, local_14 < iVar2) {
+    param_1[local_14] = param_1[local_14] ^ 0x2b;
+    local_14 = local_14 + 1;
+  }
+  while (0 < local_18) {
+    param_1[(long)local_18 + -1] = param_1[(long)local_18 + -1] ^ param_1[local_18 % iVar2];
+    local_18 = local_18 + -1;
+  }
+  return param_1;
+}
+
+Flag: gigem{p455w0rd_1n_m3m0ry1}
+Solved by: Ryan Nguyen

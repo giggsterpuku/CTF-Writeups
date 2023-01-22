@@ -1,0 +1,17 @@
+Points: 7
+Prompt: Papa brought me a packed present! let's open it. Download : 
+http://pwnable.kr/bin/flag This is reversing task. all you need is binary
+
+I was disappointed how easy this task was, but then again this is supposed to 
+be one of the easiest challenges. I first tried running it, and all the 
+program said was "I will malloc() and strcpy the flag there. take it." No flag
+came. ;( So, I tried looking into the assembly code using gdb, but it did not
+find any functions. I later found that it was compressed by a file compression
+software named UPX, so I downloaded it and decompressed the binary (package is
+upx on apt, command to decompress is upx -d flag). I was then able to look into
+the assembly, and in the main function it seemed that only the malloc() function
+was called, not the strcmp() function. Almost as if it was too obvious I
+realized I had not checked the human-readable strings in the binary, so I ran
+strings on it. Thus, the lame flag was found.
+
+Flag: UPX...? sounds like a delivery service :)
