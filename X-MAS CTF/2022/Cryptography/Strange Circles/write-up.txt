@@ -1,0 +1,32 @@
+Challenge: Strange Circles
+Category: Cryptography
+Description:
+During preparations for this year's Christmas, Santa had his elves dig up an ancient archeological site in Lapland.
+They found an ancient text written on a tablet from an age long forgotten.
+The only problem is that the text is written in a very weird language that no one can understand.
+Santa Needs you to decode the ancient text and recover the hidden knowledge that was lost.
+
+
+Note: The flag for this challenge has a non standard format, it's composed of uppercase alphabetical characters, no spaces.
+
+This took me a stupidly long time to finally realize that the decryption of the ciphertext was extremely easy, but I
+was stuck for the longest time due because of how obscure the ciphertext seemed. Looking at the given image file,
+all I saw were a bunch of circles with tick marks. I first tried looking up different ciphers that had to do with
+circles, but all results pointed to Ceasar cipher or any cipher that has a key that implements a wheel or some
+Bill Cipher character from Gravity Falls (for the record I haven't watch the show, go ahead and boo me). The next best
+thing that I though of was looking at the ciphertext as the output of some substitution cipher, and I tried to simplify
+a lot of the guessing through seeing patterns where rings repeated in the image. I tried using quipquip to plug in the
+rings as different characters corresponding to each ring, but all I got was gobbledygook. I think the first step that
+got me towards the right direction was that I noticed big spaces where patterns of rings would repeat, in particular,
+there seemed like a pattern of 4 lines of rings that repeated 4 times in the ciphertext. With that, to me it seemed like
+they were similar to stanzas of a song. Then, I paid more attention to the tick marks on the rings, and I noticed some
+were long ticks and others were short; they were also unevenly spaced at some points on the rings. Then, I quickly
+mapped in head that they looked similar to Morse code but with ticks and spacing instead of dots and dashes. Plugging in
+the first line  in the ciphertext into a Morce code decoder, I found the line read "dashing throuhg the snow." I then
+realized the rest of the ciphertext were the lines to the Chrismas song "Jingle Bells." From here, I noticed that all
+the lines and words were mapped out by the rings: each ring was a word (except for contractions, where the word was
+split into different rings where the apostrophe split them), and each line was a line in the song EXCEPT for the last
+line. I decoded that, and it so happens to be the flag.
+
+Flag: XMASFUNWITHMORSECODEANDGEOMETRY
+Solved by giggsterpuku 4.5 hours in

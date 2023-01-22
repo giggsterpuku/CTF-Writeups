@@ -1,0 +1,34 @@
+Challenge: Gimi's Wonderland
+Category: Reverse Engineering
+Description: 
+
+I took an awfully long while to actually get the setup for the chall going (3 days ._.), the analyzing of the chall and solving it took 4 hours. Opening the
+world for the first time, there is an NPC that you click to enter the flag. There is a chest nearby that contains stone bricks, a shovel labeled "Scripter,"
+and a "Script Wand" (the latter two items come from the customNPCs mod you install). In additionm there is a redstone circuit that powers up some sets of
+redstone lamps, and at the start of each circuit (there's 4 of them), there are 4 places where with a redstone block or a block of red wool is placed as
+input into the circuit. I figured that the pattern made my the lit/unlit lamps must represent some data in binary and that it's caused by some input, but I
+did not know exactly what. The sign on the chest prompts you to right-click the NPC with nothing in your right hand first and then right-click him/her
+(not being assumptuous of gender LMAO) again with the "Scripter." When you do, you are able to access the source code that the NPC runs on to set up the
+world and check the flag. You can see the log of what you input and two Java code files, but the main one lies in the last tab, and I copied its contents
+in the file check.java. Looking into the code and making some observations in the world, I found that with the flag guess you supply, when your flag is
+tested, it changes up the circuit each time by placing the redstone block and wool blocks corresponding to the inputted characters you supplied. It seems,
+looking from the negative x-direction to the positive x-direction of the world (use F3 to help you orient to those directions), the binary bits of each
+character of the flag guess alternates with those of some rkey value in the code to determine down the blocks, but the bits are reversed as you might be
+able to see in the world (0 being represented by the wool block and 1 ny the redstone block). Each pair of bits seem to be XOR'ed together to make one
+input stream in the circuits, and each pair of input streams are used to determine a particular character represented by the redstone lamps which in a
+sequence of 4 corresponds to a DNA-lookingcode that the Java code makes to check your flag guess (with all the T's, A's, C's, and G's). Each character in
+the flag guess generates 4 characters, and each time they are generated, the rkey value is modified with the character supplied (you can see that in
+check.java). I made a Python script to try to get the flag using the DNA-like sequence of characters that the flag guess is compared to along with
+the initial rkey value and implementing a method to reverse the operations of the Java code in check.java. I made it under the assumption that all the
+circuits would produce the same characters in the DNA code given the same inputs for the streams, but I found that assumption to be wrong trying out the
+script for the first few times. Testing out the different possibilities of input for each circuit in the world by using the stone bricks in the chest to
+suppress different parts of the input streams, I found that the circuits positions relatively more to the negative direction produce the same respose
+relative to each other but different to those relatively farther in the positive x-direction, and those ones responded the same. I redid the script again
+to adjust for those opbservations, and this time I was able to get the flag. Fun chall to have in Minecraft, but nowmy head hurts. Time to have my first meal
+of the day. :)
+
+P.S. If you test out the flag in the Minecraft world, make sure to supply it the output of the Python script (flag with the two periods at the end) in order
+to see the check is passed.
+
+Flag: X-MAS{h4rdWar3_encrypt1on_laNGuagE}
+Solved by giggsterpuku 3 days in
