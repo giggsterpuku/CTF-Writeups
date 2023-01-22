@@ -1,0 +1,17 @@
+Challenge: Compress and Attack
+Category: Cryptography
+Description: Your goal is to find the flag. compress_and_attack.py nc mercury.picoctf.net 50899 
+Hints:
+	-1: The flag only contains uppercase and lowercase letters, underscores, and braces (curly brackets)
+
+The idea of the exploit for the chall lies within the way the plaintext is compressed during the encryption process. The Python script shows that
+the plaintext is compressed using zlib, which after research I found uses the DEFLATE method of compression. The crux of the exploit lies within
+said lossless compression method, which does two things: duplicate string elimination and bit reduction. The process of the method is that it finds
+duplicate strings of data found in the overall data to be compressed, and in the shortened/compressed version of the data, it replaces the duplicate
+strings with shorthanded back references that point back to their first instances in the data. So, the exploit is to look at the length of the
+compressed encryption, which is given to us, and to bruteforce the flag knowing that the flag is appended onto the plaintext we give it. If the
+resulting string is shorter than all the others of payloads of the same length, then that is the next subsequent letter in the flag. Initially I
+thought that the exploit came from the stream cipher used to encrypt the plaintext and flag, Salsa20, but that as of now has yet to be cracked.
+
+Flag: picoCTF{sheriff_you_solved_the_crime}
+Solved by giggsterpuku in picoGym

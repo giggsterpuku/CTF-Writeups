@@ -1,0 +1,11 @@
+Challenge: tunnn3l v1s10n
+Category: Forensics
+Points: 40
+Description: We found this file. Recover the flag.
+Hints:
+ - 1: Weird that it won't display right...
+
+I didn't exactly know how to solve the chall so I looked so some writeups. Before that tho, I found through exiftool that the file given is a BMP file and tried changing the file extension by renaming the file with ".bmp" at the end, but no flag. I then looked at Wikipedia abt the BMP file header, and it seemed like the one on the image is fine. However, from the writeups, I found that there's another header called the DIB header, and that was corrupted. I tried opening the file after renaming it and it said that the header size was invalid, and looking into the DIB header I found that the header itself (figuring from the file header that the file was a Windows 3.0 or later BMP image) that the DIB header must be 40 bytes, and that was off in the file, so I changed it. I then got a viewable image, but no flag still. Looking at the writeups again, I found that the dimensions of the image were off. The width was wide already, but the height was super smol compared to it. So, I changed the height to 850 pixels, finding from exiftool and the hex data that the size of the image in bytes is 2893400, the bits per pixel is 24 (that means every 3 bytes in the image data represents a pixel), and the width of the image is 1134 pixels. That means that the max height of the image is 2893400 / 3 / 1134 = ~850 pixels, so I changed that according to the DIB header format. Opening the image again, I got the flag.
+
+Flag: picoCTF{qu1t3_a_v13w_2020}
+Solved in picoGym

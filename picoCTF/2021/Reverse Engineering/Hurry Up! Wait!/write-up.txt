@@ -1,0 +1,9 @@
+Challenge: Hurry Up! Wait!
+Category: Reverse Engineering
+Description: svchost.exe
+
+Looking at the binary, it is an x64 ELF binary that runs a high-level language named Ada, but I am not able to run it since I am missing some libraries. Anyway, I went on Ghidra, and there were a lot of functions to look through. The key function was labeled FUN_0010298a, and it called a bunch of other functions inside it. The first function called is ada__calendar__delays__delay_for(1000000000000000);, which makes the program delay for a presumably long, long time. The rest of the functions are FUNs, which decompiled run ada__text_io__put__4(), which print out some charaters, looking at the data printed, they are characters in the flag, so I looked at the data and pieced the flag together.
+
+Flag: picoCTF{d15a5m_ftw_eab78e4}
+Solved by giggsterpuku in picoGym
+Points: 100

@@ -1,0 +1,12 @@
+Challenge: Wireshark twoo twooo two twoo...
+Category: Forensics
+Description: Can you find the flag? shark2.pcapng.
+Hints:
+	-1: Did you really find _the_ flag?
+	-2: Look for traffic that seems suspicious.
+
+Looking at the packets in the capture file, I found several HTTP packets that have a flag file associated with them. All of them have different flags, but none of them are the actual flag. Looking at the second hint, I thought it was hinting to finding some packets containing errors, but that had nothing. I also found that there were HTTP and DNS packets that had information about a website called reddshrimpandherring.com, but I did not find much with that either. Eventually through a write-up I found that the subdomains of the website found on the DNS packets were fragments of a string in base 64 encoded, so pieceing them together, I got cGljb0NURntkbnNfM3hmMWxfZnR3X2RlYWRiZWVmfQ==, and decoded,it popped out the flag. The packets containing the subdomains came from one specific address, so I filtered it out using dns && ip.dst == 18.217.1.57.
+
+Flag: picoCTF{dns_3xf1l_ftw_deadbeef}
+Solved by giggsterpuku in the picoGym
+Points: 100

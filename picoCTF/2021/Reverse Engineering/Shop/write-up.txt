@@ -1,0 +1,11 @@
+Challenge: Shop
+Category: Reverse Engineering
+Description: Best Stuff - Cheap Stuff, Buy Buy Buy... Store Instance: source. The shop is open for business at nc mercury.picoctf.net 42159.
+Hint:
+	- 1: Always check edge cases when programming
+
+The first thing I did was try to reverse the program on Ghidra, but them I found that it was a Go binary, which was difficult to decompile and decipher. So, I ran the binary on the remote server and found that it was impossible to obtain the flag buy selling and buying fruits using POSITIVE numbers. Looking back at the decompiled code in Ghidra, I found what the hint meant by edge cases. Edge cases are cases taken at extreme situations in a program, so in this case it was the numbers inputted and stored determining the number of coins/food you wanted to buy or sell. The program did not check for negative numbers (the edge case), so I tried it on buying friuts and my currency went up. With that, I got up to 100 or more coins to buy the fruitful flag. As extra experimentation notes, I found that if you gave no option (just pressed enter) the first time you enter the program and then input another number, you could buy any number of quiches or sell any amount of food in negative numbers, but it gave u negative currency.
+
+Flag: picoCTF{b4d_brogrammer_797b292c}
+Points: 50
+Solved in picoGym

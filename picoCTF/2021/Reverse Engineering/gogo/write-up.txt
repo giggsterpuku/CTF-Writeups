@@ -1,0 +1,25 @@
+Challenge: gogo
+Category: Reverse Engineering
+Description: Hmmm this is a weird file... enter_password. There is a instance of the service running at mercury.picoctf.net:48728.
+Hints:
+	- 1: use go tool objdump or ghidra
+
+Opening the file in Ghidra, it seems to be a binary written in the Go language.
+The main functions can be found in the "ma" function folder, which contains the
+"main.<fxn>" functions, which I presume are the main functions coded into the
+program (excluding library functions). The primary fxn to check was
+main.checkPassword(), which seemed to XOR your input with another hex string.
+Then it compares the XOR'ed stuff to a value. To see what values are being
+XOR'ed I looked into it via GDB. I made a breakpoint somewhere after the
+values being XOR'ed and compared to the XOR'ed input so to see what they are.
+There is a hash-looking number and a hex string that can be found by looking at
+data in the stack at offsets $sp+4 and $sp+24. XORing them together, I find the
+password to pass is "reverseengineericanbarelyforward." When I put that input
+into the prgram, it them asks for the unhashed value stored somewhere idk. The
+hash that you needed to crack was the hash-lookin string from earlier, and
+if you ran it through an MD5 decrypter, the corresponding value would be
+"goldfish." Once sending that it, the flag was recovered.
+
+Flag: picoCTF{p1kap1ka_p1c0b187f1db}
+Points: 110
+Solved by giggsterpuku in picoGym

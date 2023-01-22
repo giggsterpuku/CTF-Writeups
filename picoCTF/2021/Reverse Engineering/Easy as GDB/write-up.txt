@@ -1,0 +1,21 @@
+Challenge: Easy as GDB
+Category: Reverse Engineering
+Description: The flag has got to be checked somewhere... File: brute
+Hints:
+	-1: https://sourceware.org/gdb/onlinedocs/gdb/Basic-Python.html#Basic-Python
+	-2: With GDB Python, I can guess wrong flags faster than ever before!
+
+Looking at the binary, it seemed pretty obvious to me along with the hints that the way to solve this chall is to bruteforce the flag...but how to
+set it up was the question. Looking at the given documentation in the hints and other write-ups not concerning this chall, I tried constructing my
+GDB Python script based off of them. The way the write-up authors bruteforced the flag using GDB was to sift through and find a breakpoint where
+something related to the input they put is compared to another value and after it is a decisive jumping point to intructions where the code either
+checks it as the right string/character in the flag or stops the comparisons and closes the program. So, I was sifting through the binary with Ghidra
+and Binary Ninja, and I found that there is a certain cmp instruction where two registers, dl and al, are compared, and if they are the same, the
+comparisons byte-by-byte between some obfuscated version of the input and what seemed to be bytes of obfuscated flag continue, and if not, the
+comparisons end. So, the way I set up the script was to set a breakpoint at the cmp address and basically bruteforce the flag byte-by-byte until the
+script had all 30 characters of the flag (which I determined by looking at the strnlen() function call in main according to the decompilers I used).
+I will confess I looked at a write-up pertaining to this chall because it seemed like the aforementioned script strategy fails when an underscore
+is input because something's up about the binary, so I made adjustments made by the write-up author to fix my script and get it to work.
+
+Flag: picoCTF{I_5D3_A11DA7_0db137a9}
+Solved by giggsterpuku in picoGym

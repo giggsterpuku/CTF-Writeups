@@ -1,0 +1,29 @@
+Challenge: Powershelly
+Category: Reverse Engineering
+Description: It's not a bad idea to learn to read Powershell. We give you the output, but do you think
+you can find the input?
+Hints:
+	-1: We tend to move only forward, but it may be a good idea to begin solving it backwards.
+	-2: The flag is in standard format, I promise.
+
+This chall was pretty perplexing at first because I had to learn a bit of Powershell on the fly, and it 
+took me a couple of weeks while working my insternship to complete, but I managed to figure out how to
+do it today. My first step was to figure out what the input looked like. I figured that the input.txt
+file has just binary strings with spaces and new lines in between, and they were split up into bytes
+to be scrambled up and encrypted into what seemed like a block cipher. The length checking for the block
+made me think that each string of bits is 6 bits long, but from testing my script, it ended up that
+there were 30 bits per string, which I don't know how that worked out, maybe I'm missing something
+there. But, looking at the total, t, and numLength variables in hindsight they were probably
+suggesting the 30-bit strings and the number of newline and space characters in input.txt. From there,
+I reversed the encryption of the input and got the input. I plugged in into RapidTables to decode it
+into ASCII, but it looked like gibberish. I though of inverting the bits to see if that revealed the
+flag, but again no luck. Then, thinking about the fact that some blocks in the input are put on the
+same line but spaced out, I thought that maybe it might be showing some ASCII art revealing the flag,
+but that idea did not work. My third idea ended up getting the flag. I looked at the binary encoding of
+"pico", and looking at the binary strings displayed, there seemed to be two different strings that
+alternated. From there, I figured maybe those strings represented a bit (1 or 0). With that, I
+implemented that into the script, and it got the flag. Real puzzling, but really satisfied that the
+chall was solved.
+
+Flag: picoCTF{2018highw@y_2_pow3r$hel!}
+Solved by giggsterpuku in picoGym

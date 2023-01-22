@@ -1,0 +1,16 @@
+Challenge: speeds and feeds
+Category: Reverse Engineering
+Description: There is something on my shop network running at nc mercury.picoctf.net 59953, but I can't tell what it is. Can you?
+Hints:
+	- 1 : What language does a CNC machine use?
+
+Nothing too hard, but it was fun to know that my engineering knowledge in my
+ENGR7A course came in handy. From the hint, I remembered that CNC machines were
+used in manufacturing mechanincal parts and 3D printing, and that is done
+using a language that the machines can intetpret: GCode. From the stream that
+I got from the remote connection, I plugged those commands into an online
+GCode interpreter and CNC viewer (https://ncviewer.com/), "printing out" my flag. 
+
+Flag: picoCTF{num3r1cal_c0ntr0l_f3fea95b}
+Points: 50
+Solved in picoGym

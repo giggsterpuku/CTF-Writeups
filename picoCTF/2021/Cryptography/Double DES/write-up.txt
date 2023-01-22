@@ -1,0 +1,16 @@
+Challenge: Double DES
+Category: Cryptography
+Description: I wanted an encryption service that's more secure than regular DES, but not as slow as 3DES... The flag is not in standard
+format. nc mercury.picoctf.net 1903 ddes.py
+Hints:
+	-1: How large is the keyspace?
+
+The exploit to the chall was to use a man-in-the-middle attack (MITM). The idea is that using DES once is ez to brute force and that
+using DES twice would increase the work of the brute force exponentially to make it a very long time to crack, but that is not the case:
+it only doubles the work time. With a known plaintext and ciphertext that I inputted and received respectively from the server, what I
+did to execute the exploit was make a dictionary in my script to store all the encrypted plaintext only going through DES ONCE, and then
+I decrypted the ciphertext I received corresponding to the plaintext ONCE. I then compared each decrypted text with each entry in the dictionary, and if the plaintext encrypted ONCE is the same as the ciphertext decrypted ONCE, I now have two potential keys to get the
+flag that is encrypted by the server. I referenced this PDF to get my way throught the chall: https://www.nku.edu/~christensen/3DES.pdf
+
+Flag: cb120914153b84dbc68fedd574b395f2
+Solved by giggsterpuku in picoGym

@@ -1,0 +1,13 @@
+Challenge: Pixelated
+Catregory: Forensics
+Description: I have these 2 images, can you make a flag out of them? scrambled1.png scrambled2.png
+Hints:
+	-1: https://en.wikipedia.org/wiki/Visual_cryptography
+	-2: Think of different ways you can "stack" images
+
+The hints suggest that the method of steganography is that the images should be superimposed on each other. I used the Image Combiner feature in the stegsolve.jar tool and I tested out the different image combining methods it had. The ADD method worked for this one. Assuming I am right about this method, it adds the RGB values of the first image to the second one.
+
+Flag: picoCTF{0542dc1d}
+Points: 100
+Solved by giggsterpuku in picoGym
+
