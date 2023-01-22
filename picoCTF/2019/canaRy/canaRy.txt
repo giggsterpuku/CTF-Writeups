@@ -1,0 +1,24 @@
+Points: 300 (after comp)
+Category: Binary Exploitation
+Prompt: This time we added a canary to detect buffer overflows. Can you still 
+find a way to retreive the flag from this program located in 
+/problems/canary_0_2aa953036679658ee5e0cc3e373aa8e0. Source.
+
+This one took me a long whil looking throught writeups and stuff, but I learned
+about how to bypass canaries on this one. From this vuln program, it seems like
+these stack canaries are places right after the buffer in the stack. Their job
+is to make sure the program exits of a bof attempt occurs, and the way they do
+that is that they are set to 4/8-byte values. The program checks if the value
+changes, and if it did, the program closes. So, the exploit is to use a bof, but
+to bypass the canary, we have to bruteforce its value so that we can change the
+eip. To make it more efficient to bruteforce the canary, I found that 
+bruteforcing the individual bytes was more effiecient and faster, so I did that.
+Once the canary was found, my exploit added it into the payload, mixed in with
+the "a"'s to fill the buffer and ebp. It took me a long time to figure out that
+the addresses of the program functions were all memorized, and after looking up
+more writeups, I discovered that I just had to run the program over and over
+until the bottom half of the function displaying the flag's address matched with
+the offset given in GDB, and then I would get the flag.
+
+Flag: picoCTF{cAnAr135_mU5t_b3_r4nd0m!_069c6f48}
+Solved by: Ryan Nguyen

@@ -1,0 +1,30 @@
+Challenge: SideChannel
+Category: Forensics
+Description: There's something fishy about this PIN-code checker, can you figure out the PIN and get the flag? Download the PIN checker program here pin_checker Once you've figured out the PIN (and gotten the checker program to accept it), connect to the master server using nc saturn.picoctf.net 52680 and provide it the PIN to get your flag.
+Hints:
+	-1: Read about "timing-based side-channel attacks."
+	-2: Attempting to reverse-engineer or exploit the binary won't help you, you can figure out the PIN just by interacting with it and measuring certain properties about it.
+	-3: Don't run your attacks against the master server, it is secured against them. The PIN code you get from the pin_checker binary is the same as the one for the master server.
+
+Looking up what a side channel attack is, I found that it is a type of
+attack that exploits the implementation of a program instead of the
+vulnerabilities of the program itself. In other words, it focuses on
+the blackboxing the program rather than trying to reverse engineer it
+and recording its behavior through responses made from the program due to
+user input. I then looked into timing attacks, which I found are a specific
+kind of side channel attacks that focus mainly on observing the response
+time of the program. The idea or cracking the PIN for the program is that
+when the program makes a comparison of the user input with the correct
+PIN, it will check the length first, then it will go character by
+character, first to last in that order, to check if the input is correct.
+To get the PIN, I used a script to measure out the response times for
+each number in the PIN, and I found it by finding which number in each
+position in the PIN made the program take the longest time to check.
+The more correct the PIN from first to last, the longer the response time
+is for the program since it takes more time to check the numbers if some
+of the previous numbers are correct. The PIN ended up being 48390513, and I
+used it to get the flag. Really cool thing to learn, timing attacks are.
+
+Flag: picoCTF{t1m1ng_4tt4ck_eb4d7efb}
+Points: 400
+Solved by giggsterpuku 9 days into comp

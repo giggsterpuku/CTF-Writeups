@@ -1,0 +1,7 @@
+   Chall   |   Points   |   Gist of Exploit
+
+############################# Binary Exploitation ##############################
+
+pointy (350): funtion pointers can be overwritten to point to other functions
+L1im1tL355 (400): C arrays do not have index boundary checks; since they are on the stack, you can potentially overwrite other vars or pointers (ie ret addr)
+rop32/rop64 (400 each): ROPgadget --binary [binary] --ropchain -> automate ROP chain to pop shell, just copy and paste into script (applies only to statically-linked files); tack on --badbytes "0a" if dealing with gets() bc it ends exploit if there is newline byte (0x0a)

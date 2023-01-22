@@ -1,0 +1,18 @@
+Challenge: Sum-O-Primes
+Category: Cryptography
+Description: We have so much faith in RSA we give you not just the product of the primes, but their sum as well! gen.py output.txt
+Hints:
+	-1: I love squares :)
+
+I really like how you can use algebra to solve an RSA chall! Really OG
+Algebra 1 tactics too. So the nubmers given are the sum of the primes, n,
+and the ciphertext c. To find p and q, I set up a quadratic equation.
+Basically, p and q are the roots of the equation, and the way to find them
+is to realize that they create a difference of squares, which come in this
+form: (x - p)(x - q) = x^2 - (p + q)x + pq. We are give pq (n) and p + q
+(the sum of the primes), so I made a script to find the roots and p and q
+were found. The rest is just RSA calculations. Nice!
+
+Flag: picoCTF{24929c45}
+Points: 400
+Solved by giggsterpuku 9 days into comp

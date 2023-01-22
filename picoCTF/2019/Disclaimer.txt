@@ -1,0 +1,1 @@
+All of these challs (except for asm1) were solved after the CTF for study.

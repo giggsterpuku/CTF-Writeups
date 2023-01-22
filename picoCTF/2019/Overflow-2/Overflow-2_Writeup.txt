@@ -1,0 +1,26 @@
+Points: 250 (after comp)
+Category: Binary Exploitation
+Prompt: Now try overwriting arguments. Can you get the flag from this program?
+You can find it in /problems/overflow-2_5_4db6d300831e973c59360066ec1cf0a4 on 
+the shell server. Source.
+
+OK so this is essentially ROP, but for some reason to pass in arguments, you
+don't need to pop registers. So, for this chall, the 1st arg is supposed to be
+0xdeadbeef, and the 2nd one is 0xcoded00d. In x86 32-bit, arguments are placed
+left to right on the stack instead of right to left like on 64-bit, so my
+payload ended having 0xdeadbeef ahead of 0xc0ded00d. I also learned more about
+convention calling for 32-bit, since the order of the stuff after the buffer is
+as follows: ebp, ret addr #1, ret addr #2, params. I didn't need a second ret
+addr, so I just put in junk since it would be irrelevant to return and the
+flag would be outputted already. Here is my final payload, returning to flag():
+python -c 'print "a"*188 + "\xe6\x85\x04\x08" + "\x70\x84\x04\x80" + "\xef\xbe\xad\xde\x0d\xd0\xde\xc0"' | ./vuln
+
+Flag: picoCTF{arg5_and_r3turn5f5d490e6}
+
+Solved by: Ryan Nguyen
+
+*Sidenote* After looking into the disassembly of the flag() function, I noticed
+that values from the registers in the calling convention were not moved onto the
+stack, so it was fine for me to just place values on the stack myself rather 
+than having to rely on registers.
+

@@ -1,0 +1,25 @@
+Challenge: Sequences
+Category: Cryptography
+Description: I wrote this linear recurrence function, can you figure out how to make it run fast enough and get the flag? Download the code here sequences.py Note that even an efficient solution might take several seconds to run. If your solution is taking several minutes, then you may need to reconsider your approach.
+Hints:
+	-1: Google "matrix diagonalization". Can you figure out how to apply it to this function?
+
+Looking at the script given, the main function generating the number for
+decryption is a recursive function, which would easily overflow the stack
+with a lot of tasks due to the large number of iterations it will have to
+go through. The task to get the flag was to reduce the recursive function
+(linear recurrence) function to a much more simplified one. To solve it,
+I just plugged in the values of the function into a Wolfram Alpha program
+to reduce the function into a solution that was more simplified. I knew
+about reducing a function similar to it in my Algebra 2 class, but this is
+way too big, so I found some program to do it for me :P. On the side,
+before I fixed me script to get the big number out, I was learning
+linear algebra a bit to learn about matrix diagonalization bc it involved
+that, and even though I didn't need to think abt it to make a reduced
+function, it helped me to understand how matrices can be used to
+simplify an equation/linear recurrence function. Nice to know, but let the
+computer do it all for you lmao.
+
+Flag: picoCTF{b1g_numb3rs_689693c6}
+Points: 400
+Solved by giggsterpuku 8 days into comp

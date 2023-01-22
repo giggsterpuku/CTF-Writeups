@@ -1,0 +1,29 @@
+################################ Write-Up #################################
+# Challenge: transposition-trial
+# Category: Cryptography
+# Description: Our data got corrupted on the way here. Luckily, nothing got replaced, but every block of 3 got scrambled around! The first word seems to be three letters long, maybe you can use that to recover the rest of the message. Download the corrupted message here.
+# Hints:
+#	-1: Split the message up into blocks of 3 and see how the first block is scrambled
+#
+# Ez chall, but I justed wanted to take notes on it. Transposition ciphers
+# are basically crypto algorithms used to rearrange characters in plaintext
+# messages so that they look completely unfamiliar. This one happens to be
+# a columnar tranposition, in which you can arrange every certain number
+# of chars (in this case 3) into rows that go down by column, and then you
+# can shift the order of the columns and take the results and put them
+# together to get a ciphertext. The shift here is that the first letter
+# in the 3-letter row is moved from the first (leftmost) column to the
+# last (rightmost) column. Undoing that gets you the flag. I made this
+# script to automate that process for me.
+#
+# Flag: picoCTF{7R4N5P051N6_15_3XP3N51V3_A9AFB178}
+# Points: 100
+# SOlved by giggsterpuku 1 day into comp
+
+c = "heTfl g as iicpCTo{7F4NRP051N5_16_35P3X51N3_V9AAB1F8}7"
+flag = ''
+for i in range(int(len(c) / 3)):
+	flag += c[i * 3 + 2]
+	flag += c[i * 3]
+	flag += c[i * 3 + 1]
+print(flag)
