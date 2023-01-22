@@ -1,0 +1,22 @@
+Points: 70
+Prompt:
+
+Ok I am basically making a writup of what Rahil did. I guessed only some of the stuff in it. So when you run the file,
+it says this: "So you figured out how to provide input and command line arguments. But can you figure out what input to
+ provide?" Without any arguments, it said: "Make sure you have the correct amount of command line arguments!" So, I first
+tested how many arguments to put until it put out a different output. Once I got four arguments, it said: "Don't try to 
+guess the arguments, it won't work." Now I know the number of arguments to use is 4. Next (here comes Poggers) I pulled
+up a decompiler (IDA in this case) and saw what the code was if it was in C. I only focused on the if statements, since it 
+would show what arguments to use. The first three arguments were first checked to see if they were numbers between 0 and 9.
+Then, if they were, the if statement was something like this: <arg1>*10 + <arg2>*100 + <arg3> == 932. The three arguments 
+must be 3, 9, and 2 in order. If that goes through, fourth argument was compared to the string "chicken." That means the 
+fourth parameter must be "chicken." Once you put those arguments in, the program then asks for your password. The password
+was XORed with 0x2a or something like that to match it up with a variable called "desired." What I then did is XOR each 
+byte in "desired" with 0x2a to get the password. Since the program reads it like a letter sting, I converted what I got
+into ASCII, which then was "please give flag." I entered that and gave me the flag.
+
+FYI: This was after the competition ended. This was the only challenge I worked on the rest of the CTF after the second day.
+:)
+
+Flag: actf{th3y_gr0w_up_s0_f4st}
+Solved by: Ryan Nguyen (with help from Rahil "Poggers" Shah)

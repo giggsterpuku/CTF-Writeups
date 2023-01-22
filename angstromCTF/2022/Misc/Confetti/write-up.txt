@@ -1,0 +1,20 @@
+Challenge: Confetti
+Category: Misc
+Description: "From the sky, drop like confetti All eyes on me, so V.I.P All of my dreams, from the sky, drop like confetti" - Little Mix confetti.png
+
+I ran the file through exiftool, and I found in a section laebeled [minor] that
+there is written data after the IEND chunk, which ususally ends the PNG file.
+Looking up what could be the forensics clue, I found a solution to the problem,
+which suggested that there were additional PNG files concatenated to the file
+we were given. First, I used xxd to give a hexdump of the files and grep'd the
+output for the term "PNG," which shows where the magic bytes are in the single
+file. Four lines popped up, indicating that there are 4 PNG files in the file.
+The memory addressed where one file ends and another starts are also in the
+grep output, so I used them to carve out the images using dd. As a summary,
+I ran this command and its options: dd if=confetti.png of=<file#>.png skip=
+<where PNG file starts> count=<byte size of file, calculated using offsets> bs=1
+Looking at the second image in the file after carving, it spewed the flag. Nice!
+
+Flag: actf{so_swe3t_so_c0ld_so_f4ir_7167cfa2c019}
+Points: 40
+Solved by giggsterpuku after comp

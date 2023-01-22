@@ -1,0 +1,22 @@
+Points: 100 (after comp)
+Category: rev
+Prompt: This binary has nothing to hide!
+
+This challenge seem like some really wack way to show you how you can
+somehow find hidden info through disassembly. In the "app" binary, the
+only function that stuck out to me that I noticed was one that
+opened a file called "not_even_real.txt," and for some dumb reason I 
+thought that would show how to find the flag, but I saw nothing that checks
+any of the text in the file. Yet, being the dumb boy i am, I still try to
+bruteforce the flag through that. After looking at a couple of writeups, 
+I found that there was a section names a wierd name (.aj1ishudgqis),
+and I found that there was some disassembly under it. Apparently, the flag
+could be found by taking all the byte values (not DWORD values) passed into
+the stack and subtracting some offset (40) from them to decipher the flag. 
+Like I said, really wack. Seems more like to forensics-type problem than a
+rev one but ok. Also, the flag that I found had one char wrong, so I 
+guessed it.
+* Sidenote: dns and green beans also think the chall was gay *
+
+Flag: flag{u_h4v3_r3c0v3r3d_m3}
+Solved by: Ryan Nguyen

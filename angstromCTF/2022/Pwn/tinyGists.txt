@@ -1,0 +1,6 @@
+* Notes for challs from AngstromCTF 2022 going back and reviewing problems *
+* Not the major strat to solving the challs, but important deets to look out for
+and tips for future challs and exploits*
+Pwn:
+whereami - can use gets() in ROP chain and load var in rdi to change value of var
+really obnoxious problem - pass in string pointers for args to a fxn in ROP chain, use a var assoc w/ input and use its pointer for arg

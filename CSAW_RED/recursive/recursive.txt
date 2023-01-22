@@ -1,0 +1,17 @@
+Points: 150 (6hrs in)
+Category: rev
+Prompt: Onions have layers. Recursions have layers. nc rev.red.csaw.io 5000
+
+When I first ran the executable, the program asked for a number and then
+either segfaults or say nope no flag :( Anywho, I fired it up in Ghidra
+and look through the decompiled code (see ghidra.txt). So, the gist is
+that there is a recursive function, and you must run it 7 times and make it
+stop at the 8th iteration, and the function divides your input every
+iteration until the number inputted is odd, and then it returns the odd
+number. So, by looking at the main comparison to get the flag, the 
+final number returned must be 11. To get the number to input, I multiplied
+11 by 2 to the 7th power and got 1208. I put in the number and then got the
+flag from the server.
+
+Flag: flag{r3Curs1Ve_Rev3rSe}
+Solved by: Ryan Nguyen

@@ -1,0 +1,13 @@
+Points: 30
+Prompt: Find my password from this recording (:
+* File attached was recording.pcapng *
+
+From the file extension name I figure it is a packet capture, so Wireshark
+would required to solve this challenge. I honestly don't know how to use it,
+so ran strings on it to get its human-readable text and searched for the flag,
+and luckily I got it. FYI: The command I used is strings recording.pcapng | 
+grep actf.
+
+*Someone w/ Wireshark skills please make a better write-up.*
+Flag: actf{wireshark_isn't_so_bad_huh-a9d8g99ikdf}
+Solved by: Ryan Nguyen

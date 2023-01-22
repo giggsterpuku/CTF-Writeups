@@ -1,0 +1,163 @@
+Disassembly of section .aj1ishudgqis:
+
+00000000008001a0 <.aj1ishudgqis>:
+  8001a0:	55                   	push   rbp
+  8001a1:	48 89 e5             	mov    rbp,rsp
+  8001a4:	c7 45 fc 36 14 03 00 	mov    DWORD PTR [rbp-0x4],0x31436
+  8001ab:	81 7d fc 5a 3f 00 00 	cmp    DWORD PTR [rbp-0x4],0x3f5a
+  8001b2:	75 0a                	jne    8001be <getc@plt+0x7ff14e>
+  8001b4:	b8 01 00 00 00       	mov    eax,0x1
+  8001b9:	e9 e4 02 00 00       	jmp    8004a2 <getc@plt+0x7ff432>
+  8001be:	c6 45 fc 8e          	mov    BYTE PTR [rbp-0x4],0x8e
+  8001c2:	c7 45 fc a3 3c 09 00 	mov    DWORD PTR [rbp-0x4],0x93ca3
+  8001c9:	81 7d fc ec 40 1f 00 	cmp    DWORD PTR [rbp-0x4],0x1f40ec
+  8001d0:	75 0a                	jne    8001dc <getc@plt+0x7ff16c>
+  8001d2:	b8 01 00 00 00       	mov    eax,0x1
+  8001d7:	e9 c6 02 00 00       	jmp    8004a2 <getc@plt+0x7ff432>
+  8001dc:	c6 45 fd 94          	mov    BYTE PTR [rbp-0x3],0x94
+  8001e0:	c7 45 fc c9 7e 13 00 	mov    DWORD PTR [rbp-0x4],0x137ec9
+  8001e7:	81 7d fc 47 fc 03 00 	cmp    DWORD PTR [rbp-0x4],0x3fc47
+  8001ee:	75 0a                	jne    8001fa <getc@plt+0x7ff18a>
+  8001f0:	b8 01 00 00 00       	mov    eax,0x1
+  8001f5:	e9 a8 02 00 00       	jmp    8004a2 <getc@plt+0x7ff432>
+  8001fa:	c6 45 fe 89          	mov    BYTE PTR [rbp-0x2],0x89
+  8001fe:	c7 45 fc 7c fe 14 00 	mov    DWORD PTR [rbp-0x4],0x14fe7c
+  800205:	81 7d fc 28 18 02 00 	cmp    DWORD PTR [rbp-0x4],0x21828
+  80020c:	75 0a                	jne    800218 <getc@plt+0x7ff1a8>
+  80020e:	b8 01 00 00 00       	mov    eax,0x1
+  800213:	e9 8a 02 00 00       	jmp    8004a2 <getc@plt+0x7ff432>
+  800218:	c6 45 ff 8f          	mov    BYTE PTR [rbp-0x1],0x8f
+  80021c:	c7 45 fc fa d3 06 00 	mov    DWORD PTR [rbp-0x4],0x6d3fa
+  800223:	81 7d fc 70 50 03 00 	cmp    DWORD PTR [rbp-0x4],0x35070
+  80022a:	75 0a                	jne    800236 <getc@plt+0x7ff1c6>
+  80022c:	b8 01 00 00 00       	mov    eax,0x1
+  800231:	e9 6c 02 00 00       	jmp    8004a2 <getc@plt+0x7ff432>
+  800236:	c6 45 00 a3          	mov    BYTE PTR [rbp+0x0],0xa3
+  80023a:	c7 45 fc e2 b6 12 00 	mov    DWORD PTR [rbp-0x4],0x12b6e2
+  800241:	81 7d fc c6 0e 13 00 	cmp    DWORD PTR [rbp-0x4],0x130ec6
+  800248:	75 0a                	jne    800254 <getc@plt+0x7ff1e4>
+  80024a:	b8 01 00 00 00       	mov    eax,0x1
+  80024f:	e9 4e 02 00 00       	jmp    8004a2 <getc@plt+0x7ff432>
+  800254:	c6 45 01 9d          	mov    BYTE PTR [rbp+0x1],0x9d
+  800258:	c7 45 fc d7 46 0a 00 	mov    DWORD PTR [rbp-0x4],0xa46d7
+  80025f:	81 7d fc b8 e9 18 00 	cmp    DWORD PTR [rbp-0x4],0x18e9b8
+  800266:	75 0a                	jne    800272 <getc@plt+0x7ff202>
+  800268:	b8 01 00 00 00       	mov    eax,0x1
+  80026d:	e9 30 02 00 00       	jmp    8004a2 <getc@plt+0x7ff432>
+  800272:	c6 45 02 87          	mov    BYTE PTR [rbp+0x2],0x87
+  800276:	c7 45 fc e7 f5 1b 00 	mov    DWORD PTR [rbp-0x4],0x1bf5e7
+  80027d:	81 7d fc a1 b3 27 00 	cmp    DWORD PTR [rbp-0x4],0x27b3a1
+  800284:	75 0a                	jne    800290 <getc@plt+0x7ff220>
+  800286:	b8 01 00 00 00       	mov    eax,0x1
+  80028b:	e9 12 02 00 00       	jmp    8004a2 <getc@plt+0x7ff432>
+  800290:	c6 45 03 90          	mov    BYTE PTR [rbp+0x3],0x90
+  800294:	c7 45 fc e5 e7 19 00 	mov    DWORD PTR [rbp-0x4],0x19e7e5
+  80029b:	81 7d fc 63 8d 03 00 	cmp    DWORD PTR [rbp-0x4],0x38d63
+  8002a2:	75 0a                	jne    8002ae <getc@plt+0x7ff23e>
+  8002a4:	b8 01 00 00 00       	mov    eax,0x1
+  8002a9:	e9 f4 01 00 00       	jmp    8004a2 <getc@plt+0x7ff432>
+  8002ae:	c6 45 04 5c          	mov    BYTE PTR [rbp+0x4],0x5c
+  8002b2:	c7 45 fc 0d fe 09 00 	mov    DWORD PTR [rbp-0x4],0x9fe0d
+  8002b9:	81 7d fc 2b 2f 02 00 	cmp    DWORD PTR [rbp-0x4],0x22f2b
+  8002c0:	75 0a                	jne    8002cc <getc@plt+0x7ff25c>
+  8002c2:	b8 01 00 00 00       	mov    eax,0x1
+  8002c7:	e9 d6 01 00 00       	jmp    8004a2 <getc@plt+0x7ff432>
+  8002cc:	c6 45 05 9e          	mov    BYTE PTR [rbp+0x5],0x9e
+  8002d0:	c7 45 fc bc 86 07 00 	mov    DWORD PTR [rbp-0x4],0x786bc
+  8002d7:	81 7d fc ec 91 00 00 	cmp    DWORD PTR [rbp-0x4],0x91ec
+  8002de:	75 0a                	jne    8002ea <getc@plt+0x7ff27a>
+  8002e0:	b8 01 00 00 00       	mov    eax,0x1
+  8002e5:	e9 b8 01 00 00       	jmp    8004a2 <getc@plt+0x7ff432>
+  8002ea:	c6 45 06 5b          	mov    BYTE PTR [rbp+0x6],0x5b
+  8002ee:	c7 45 fc a4 5a 05 00 	mov    DWORD PTR [rbp-0x4],0x55aa4
+  8002f5:	81 7d fc d5 45 0e 00 	cmp    DWORD PTR [rbp-0x4],0xe45d5
+  8002fc:	75 0a                	jne    800308 <getc@plt+0x7ff298>
+  8002fe:	b8 01 00 00 00       	mov    eax,0x1
+  800303:	e9 9a 01 00 00       	jmp    8004a2 <getc@plt+0x7ff432>
+  800308:	c6 45 07 87          	mov    BYTE PTR [rbp+0x7],0x87
+  80030c:	c7 45 fc a1 c1 15 00 	mov    DWORD PTR [rbp-0x4],0x15c1a1
+  800313:	81 7d fc c4 f5 1c 00 	cmp    DWORD PTR [rbp-0x4],0x1cf5c4
+  80031a:	75 0a                	jne    800326 <getc@plt+0x7ff2b6>
+  80031c:	b8 01 00 00 00       	mov    eax,0x1
+  800321:	e9 7c 01 00 00       	jmp    8004a2 <getc@plt+0x7ff432>
+  800326:	c6 45 08 9a          	mov    BYTE PTR [rbp+0x8],0x9a
+  80032a:	c7 45 fc 3a 16 0a 00 	mov    DWORD PTR [rbp-0x4],0xa163a
+  800331:	81 7d fc 4a d1 1d 00 	cmp    DWORD PTR [rbp-0x4],0x1dd14a
+  800338:	75 0a                	jne    800344 <getc@plt+0x7ff2d4>
+  80033a:	b8 01 00 00 00       	mov    eax,0x1
+  80033f:	e9 5e 01 00 00       	jmp    8004a2 <getc@plt+0x7ff432>
+  800344:	c6 45 09 5b          	mov    BYTE PTR [rbp+0x9],0x5b
+  800348:	c7 45 fc 33 c6 0a 00 	mov    DWORD PTR [rbp-0x4],0xac633
+  80034f:	81 7d fc ea 0d 10 00 	cmp    DWORD PTR [rbp-0x4],0x100dea
+  800356:	75 0a                	jne    800362 <getc@plt+0x7ff2f2>
+  800358:	b8 01 00 00 00       	mov    eax,0x1
+  80035d:	e9 40 01 00 00       	jmp    8004a2 <getc@plt+0x7ff432>
+  800362:	c6 45 0a 8b          	mov    BYTE PTR [rbp+0xa],0x8b
+  800366:	c7 45 fc e1 81 1a 00 	mov    DWORD PTR [rbp-0x4],0x1a81e1
+  80036d:	81 7d fc 92 dc 1c 00 	cmp    DWORD PTR [rbp-0x4],0x1cdc92
+  800374:	75 0a                	jne    800380 <getc@plt+0x7ff310>
+  800376:	b8 01 00 00 00       	mov    eax,0x1
+  80037b:	e9 22 01 00 00       	jmp    8004a2 <getc@plt+0x7ff432>
+  800380:	c6 45 0b 58          	mov    BYTE PTR [rbp+0xb],0x58
+  800384:	c7 45 fc 11 52 0e 00 	mov    DWORD PTR [rbp-0x4],0xe5211
+  80038b:	81 7d fc 8b 93 04 00 	cmp    DWORD PTR [rbp-0x4],0x4938b
+  800392:	75 0a                	jne    80039e <getc@plt+0x7ff32e>
+  800394:	b8 01 00 00 00       	mov    eax,0x1
+  800399:	e9 04 01 00 00       	jmp    8004a2 <getc@plt+0x7ff432>
+  80039e:	c6 45 0c 9e          	mov    BYTE PTR [rbp+0xc],0x9e
+  8003a2:	c7 45 fc a8 31 1d 00 	mov    DWORD PTR [rbp-0x4],0x1d31a8
+  8003a9:	81 7d fc 28 5b 13 00 	cmp    DWORD PTR [rbp-0x4],0x135b28
+  8003b0:	75 0a                	jne    8003bc <getc@plt+0x7ff34c>
+  8003b2:	b8 01 00 00 00       	mov    eax,0x1
+  8003b7:	e9 e6 00 00 00       	jmp    8004a2 <getc@plt+0x7ff432>
+  8003bc:	c6 45 0d 5b          	mov    BYTE PTR [rbp+0xd],0x5b
+  8003c0:	c7 45 fc 4b 10 0d 00 	mov    DWORD PTR [rbp-0x4],0xd104b
+  8003c7:	81 7d fc 36 36 11 00 	cmp    DWORD PTR [rbp-0x4],0x113636
+  8003ce:	75 0a                	jne    8003da <getc@plt+0x7ff36a>
+  8003d0:	b8 01 00 00 00       	mov    eax,0x1
+  8003d5:	e9 c8 00 00 00       	jmp    8004a2 <getc@plt+0x7ff432>
+  8003da:	c6 45 0e 9a          	mov    BYTE PTR [rbp+0xe],0x9a
+  8003de:	c7 45 fc bb b6 0d 00 	mov    DWORD PTR [rbp-0x4],0xdb6bb
+  8003e5:	81 7d fc b9 af 20 00 	cmp    DWORD PTR [rbp-0x4],0x20afb9
+  8003ec:	75 0a                	jne    8003f8 <getc@plt+0x7ff388>
+  8003ee:	b8 01 00 00 00       	mov    eax,0x1
+  8003f3:	e9 aa 00 00 00       	jmp    8004a2 <getc@plt+0x7ff432>
+  8003f8:	c6 45 0f 5b          	mov    BYTE PTR [rbp+0xf],0x5b
+  8003fc:	c7 45 fc 5d f2 06 00 	mov    DWORD PTR [rbp-0x4],0x6f25d
+  800403:	81 7d fc 52 87 18 00 	cmp    DWORD PTR [rbp-0x4],0x188752
+  80040a:	75 0a                	jne    800416 <getc@plt+0x7ff3a6>
+  80040c:	b8 01 00 00 00       	mov    eax,0x1
+  800411:	e9 8c 00 00 00       	jmp    8004a2 <getc@plt+0x7ff432>
+  800416:	c6 45 10 8c          	mov    BYTE PTR [rbp+0x10],0x8c
+  80041a:	c7 45 fc 12 f8 14 00 	mov    DWORD PTR [rbp-0x4],0x14f812
+  800421:	81 7d fc a0 3d 0b 00 	cmp    DWORD PTR [rbp-0x4],0xb3da0
+  800428:	75 07                	jne    800431 <getc@plt+0x7ff3c1>
+  80042a:	b8 01 00 00 00       	mov    eax,0x1
+  80042f:	eb 71                	jmp    8004a2 <getc@plt+0x7ff432>
+  800431:	c6 45 11 87          	mov    BYTE PTR [rbp+0x11],0x87
+  800435:	c7 45 fc 62 9b 08 00 	mov    DWORD PTR [rbp-0x4],0x89b62
+  80043c:	81 7d fc 60 11 13 00 	cmp    DWORD PTR [rbp-0x4],0x131160
+  800443:	75 07                	jne    80044c <getc@plt+0x7ff3dc>
+  800445:	b8 01 00 00 00       	mov    eax,0x1
+  80044a:	eb 56                	jmp    8004a2 <getc@plt+0x7ff432>
+  80044c:	c6 45 12 95          	mov    BYTE PTR [rbp+0x12],0x95
+  800450:	c7 45 fc ba 3c 01 00 	mov    DWORD PTR [rbp-0x4],0x13cba
+  800457:	81 7d fc 8d 22 02 00 	cmp    DWORD PTR [rbp-0x4],0x2228d
+  80045e:	75 07                	jne    800467 <getc@plt+0x7ff3f7>
+  800460:	b8 01 00 00 00       	mov    eax,0x1
+  800465:	eb 3b                	jmp    8004a2 <getc@plt+0x7ff432>
+  800467:	c6 45 13 5b          	mov    BYTE PTR [rbp+0x13],0x5b
+  80046b:	c7 45 fc 81 a6 0c 00 	mov    DWORD PTR [rbp-0x4],0xca681
+  800472:	81 7d fc 45 b5 19 00 	cmp    DWORD PTR [rbp-0x4],0x19b545
+  800479:	75 07                	jne    800482 <getc@plt+0x7ff412>
+  80047b:	b8 01 00 00 00       	mov    eax,0x1
+  800480:	eb 20                	jmp    8004a2 <getc@plt+0x7ff432>
+  800482:	c6 45 14 a5          	mov    BYTE PTR [rbp+0x14],0xa5
+  800486:	c7 45 fc 95 0b 05 00 	mov    DWORD PTR [rbp-0x4],0x50b95
+  80048d:	81 7d fc d2 79 24 00 	cmp    DWORD PTR [rbp-0x4],0x2479d2
+  800494:	75 07                	jne    80049d <getc@plt+0x7ff42d>
+  800496:	b8 01 00 00 00       	mov    eax,0x1
+  80049b:	eb 05                	jmp    8004a2 <getc@plt+0x7ff432>
+  80049d:	b8 00 00 00 00       	mov    eax,0x0
+  8004a2:	5d                   	pop    rbp
+  8004a3:	c3                   	ret    

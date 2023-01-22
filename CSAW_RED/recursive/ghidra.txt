@@ -1,0 +1,51 @@
+main()
+ {
+  ... 
+  local_30 = *(long *)(in_FS_OFFSET + 0x28);
+  local_60 = 0;
+  local_6c = 0;
+  local_64 = 0x18;
+  local_68 = 6;
+  local_5c = 0;
+  local_58 = 5;
+  local_50 = acStack136;
+  local_48 = 0x17;
+  local_40 = acStack168;
+  local_38 = (FILE *)0x0;
+  puts("Enter a number from 1 to 99999:");
+  fgets(local_50,local_68,stdin); //local_50 = [str version of number]
+  local_5c = atoi(local_50); // ur input as an integer
+  if (0 < (int)local_5c) {
+    local_60 = f((ulong)local_5c,&local_6c,&local_6c);
+  }
+  if ((local_6c == 7) && (local_60 + 7 == local_64 - local_68)) { //f must run 7 times (stop at 8th iteration) and local_60 = 11
+    local_38 = fopen("flag.txt","r");
+    fgets(local_40,local_64,local_38);
+    puts(local_40);
+  }
+  else {
+    puts("Nope, that\'s not it.");
+  }
+  if (local_30 != *(long *)(in_FS_OFFSET + 0x28)) {
+                    /* WARNING: Subroutine does not return */
+    uStack128 = 0x1009d0;
+    __stack_chk_fail();
+  }
+  return 0;
+
+ulong f(uint param_1,int *param_2)
+
+{
+  ulong uVar1;
+  
+  if ((param_1 & 1) == 0) { //number must be odd to stop it
+    *param_2 = *param_2 + 1;
+    uVar1 = f((ulong)(uint)((int)param_1 / 2),param_2,(ulong)(uint)((int)param_1 / 2));
+  }
+  else {
+    uVar1 = (ulong)param_1;
+  }
+  return uVar1;
+}
+
+//Current guess at input: 1408

@@ -1,0 +1,22 @@
+Points:311 (3 hours into comp)
+Category: Reversing
+Prompt: This activity will ask you to reverse a basic program and solve an 
+introductory reversing challenge. You will be given an output that is to be 
+used in order to reconstruct the input, which is the flag.
+[Note: The "Student Guide" isn't needed to solve the challenges in this series.]
+
+I first started off trying to determine what the program did, so I looked into 
+the code. The program first prompts for and input, and then it processes it into
+the shift() function, which shifts each character in the input one ASCII 
+character lower than the previous character. Next, the input is processed into
+shift2(), which shifts the characters in the string up 2 places. The program
+compares the final string with the value "inagzgkpm)Wl&Tg&io" to see if it is 
+equal and then tells in the output whether your input is the flag or not. Once 
+I determined what it did, I edited the program to make it do the opposite of 
+what it did, changing the shifting functions and having the program run shift() 
+on the input before shift2(). I used the value compared in the program as the 
+input, and I got the flag by running the program.
+*Sidenote: refer to the ComputerSciencePrinciples.java file to see what I did*
+
+Flag: flag{intr0_t0_r3v}
+Solved by: Ryan Nguyen

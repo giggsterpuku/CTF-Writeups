@@ -1,0 +1,12 @@
+Points: 100 (8 min before end)
+Category: rev
+Prompt: Greetings, employee #9458. Please ensure that our DRM software is 
+sufficiently secure. nc rev.red.csaw.io 5004
+
+To get the flag, there was a passphrase needed, By going in Ghidra, you
+could see a trademark() function XORed 3 phrases together to get the passphrase,
+and all you had to do was do that and enter the string you got from it. Then,
+the flag came out in a jiffy.
+
+Flag: flag{fr3e_n_0p1n_so@rce_xd}
+Solved by: Ryan Nguyen

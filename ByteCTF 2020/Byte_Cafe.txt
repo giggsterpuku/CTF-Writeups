@@ -1,0 +1,10 @@
+Points: 150 (1 hour in comp)
+Category: pwn
+Prompt: Here’s a great place to eat. What would you like to have? nc 23.100.18.186 6677 Author: Aryan
+
+Very ez intro bof exercise. Find the padding in GDB (or not), which is 1004, and overflow buffer
+with a's.
+
+Flag: flag{bits_are_delicious}
+
+Solved by: Ryan Nguyen

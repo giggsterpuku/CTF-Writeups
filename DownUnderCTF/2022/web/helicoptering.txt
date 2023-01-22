@@ -1,0 +1,35 @@
+Challenge: helicoptering
+Category: web
+Description: Is that an Apache I overheard?
+
+The exploit to the challenge is to use different requests and headers to get the pieces of the flag. The website splits
+the flag up into two different files, and each file is protected by different filters to throw a 403 HTTP error
+(access forbidden) when you try to access them. Here are the filters:
+
+one/.htaccess:
+RewriteEngine On
+RewriteCond %{HTTP_HOST} !^localhost$
+RewriteRule ".*" "-" [F]
+
+two/.htaccess:
+RewriteEngine On
+RewriteCond %{THE_REQUEST} flag
+RewriteRule ".*" "-" [F]
+
+So, both use the RewriteEngine module to modify the requests you give to the website if your request matches the
+condition in the RewriteCond statements. The first on prohibits you to visit the site if the request is not made by the
+host server of the website...actually, it just checks the HOST header in the HTTP request you sent to see if it is
+actually from the host server. We can just modify our HOST header field to get the first part of the flag:
+
+curl -H HOST:localhost http://34.87.217.252:30026/one/flag.txt
+
+The second part of the flag is protected by a filter that sees if the request that you make has the string "flag" in it,
+basically no allowing you to directly get the flag just by going to the directory with the string "flag" in it. To
+byapss this, what I did was encode the "flag" part in the request into URL encoding. The request would then not have the
+word "flag" in it to pass the check, but when the link is interpreted, the flag.txt file will be grabbed. Thus, the
+second flag can be grabbed with this cURL command:
+
+curl http://34.87.217.252:30026/two/%66%6c%61%67.txt (P.S. you can just encode one character and you would be fine)
+
+Flag: DUCTF{thats_it_next_time_im_using_nginx}
+Reviewed by giggsterpuku

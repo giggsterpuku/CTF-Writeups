@@ -1,0 +1,26 @@
+var8 = 0x4f
+var10 = 0x14be74f15
+var18 = 0x4
+var20 = 0x3
+var28 = 0x13
+var30 = 0x115
+var38 = 0x77cf4b645b61
+var40 = 0x2
+var48 = 0x11
+var50 = 0x21c1
+var58 = 0x182265e9
+var60 = 0x833
+var68 = 0xaab
+var70 = 0x8daaad
+
+var78 = var8 * var10
+var80 = var18 * var20 * var28 * var30 * var38
+var88 = var40 * var48 * var50 * var58
+var90 = var60 * var68 * var70
+
+var78 = 0x666c61677b
+var80 = 0x73757033725f7634
+var88 = 0x6c31645f7072
+var90 = 0x306772346d7d
+
+Flag: flag{sup3r_v4l1d_pr0gr4m}

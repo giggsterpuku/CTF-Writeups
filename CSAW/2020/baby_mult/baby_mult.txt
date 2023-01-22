@@ -1,0 +1,20 @@
+Points: 50 (after comp)
+Category: rev
+Prompt:
+
+During the competition, I was close to getting to what the idea behind the
+chall was but did not figure it out, so I looked at some writeups for this
+one. The thing I did do correctly was realize that the program.txt file had
+opcodes, and that what I needed to do was assemble it. I was going to run
+it, but then I gave up on finding a way to, so I didn't solve this chall in
+time. :( However, I did learn about imul afterwards, an x86_64 instruction
+to multiply operands, hence the name of the chall. I read through the asm
+code, and what the writeups told me was that the flag was hidden within the
+multiplication operations of the code. After making some pseudocode and
+solving stuff out, I found that there were four vars in the program that
+were products of the multiplication operations, and each of them had a
+piece of the flag. Thus, I was able to piece them together. I should def
+try to parse the asm next time and not get lazy.
+
+Flag: flag{sup3r_v4l1d_pr0gr4m}
+Solved by: Ryan Nguyen

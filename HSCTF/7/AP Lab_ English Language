@@ -1,0 +1,16 @@
+Points: 100 (17 hrs into comp)
+Category: Reversing
+Prompt: The AP English Language activity will ask you to reverse a program about manipulating strings 
+and arrays. Again, an output will be given where you have to reconstruct an input.
+
+Just like the AP CompSci rev chall, I made the functions do the opposite to get the flag. This time,
+the input is put into a transpose function that moves the letters of the flag around in a certain order
+specified by an array and then xor'ed into an xor function. This happens in a loop three times. So, to 
+undo the string in the program, I made the loop xor the input and then transpose it. I did not need to 
+change the xor function since xor'ing a string twice makes it the original string. For the transpose 
+function, I noted the positions of the original string's characters in the new string and made an array 
+of the indexes of those original characters in the new string to run the function through. The flag came
+out wrong, but I just neede to change a few charcters to make it right.
+
+Flag: flag{n0t_t00_b4d_r1ght}
+Solved by: Ryan Nguyen
