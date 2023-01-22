@@ -1,0 +1,223 @@
+Challenge: typop
+Category: Pwn
+Description: While writing the feedback form for idekCTF, JW made a small typo. It still compiled though, so what could
+possibly go wrong?
+
+Man, am I hella satisfied at solving only one chall in the CTF, as this is the one that took me almost all of the CTF
+minus 3 hours. It was a beast of a chall, so I can only imagine what all the other 57 challs I didn't solve are like.
+At a first glance in Ghidra, the chall straightaway looked like a ROP chall to me. Looking at the functions in the
+binary, there is a getFeedback() function that takes in input into what seems to be a 10-byte buffer:
+
+void getFeedback(void)
+
+{
+  long in_FS_OFFSET;
+  undefined8 local_1a; // local_1a and local_12 constitute the 10-byte buffer
+  undefined2 local_12; 
+  long local_10; // canary buffer
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  local_1a = 0;
+  local_12 = 0;
+  puts("Do you like ctf?");
+  read(0,&local_1a,30); // potential buffer overflow exploit, ovewriting possible 30 bytes into 10-byte buffer and more
+  printf("You said: %s\n",&local_1a);
+  if ((char)local_1a == 'y') {
+    printf("That\'s great! ");
+  }
+  else {
+    printf("Aww :( ");
+  }
+  puts("Can you provide some extra feedback?");
+  read(0,&local_1a,90); // potential buffer overflow exploit, ovewriting possible 90 bytes into 10-byte buffer and more
+  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) { // canary check
+                    /* WARNING: Subroutine does not return */
+    __stack_chk_fail();
+  }
+  return;
+
+It seems there is a canary we have to bypass. In addition, looking for more functions, I spotted a win() function
+that seems to be the key to obtaining the flag:
+
+void win(undefined param_1,undefined param_2,undefined param_3)
+
+{
+  FILE *__stream;
+  long in_FS_OFFSET;
+  undefined8 local_52;
+  undefined2 local_4a;
+  undefined8 local_48;
+  undefined8 local_40;
+  undefined8 local_38;
+  undefined8 local_30;
+  undefined8 local_28;
+  undefined8 local_20;
+  long local_10;
+  
+  local_10 = *(long *)(in_FS_OFFSET + 0x28);
+  local_4a = 0;
+  local_52 = CONCAT17(0x74,CONCAT16(0x78,CONCAT15(0x74,CONCAT14(0x2e,CONCAT13(0x67,CONCAT12(param _3,
+                                                  CONCAT11(param_2,param_1))))))); // string concatenation
+  __stream = fopen((char *)&local_52,"r");
+  if (__stream == (FILE *)0x0) {
+    puts("Error opening flag file.");
+                    /* WARNING: Subroutine does not return */
+    exit(1);
+  }
+  local_48 = 0;
+  local_40 = 0;
+  local_38 = 0;
+  local_30 = 0;
+  local_28 = 0;
+  local_20 = 0;
+  fgets((char *)&local_48,0x20,__stream);
+  puts((char *)&local_48);
+  if (local_10 != *(long *)(in_FS_OFFSET + 0x28)) {
+                    /* WARNING: Subroutine does not return */
+    __stack_chk_fail();
+  }
+  return;
+}
+
+Looks like I will need to pass in 3 parameters, and they will be concatenated as characters to the rest of the ASCII
+characters from the hexidecimal numbers above to form the name of the file to read from. From looking at the numbers
+in the CONCAT statements, it seems like the string formed at the end of all the concatenations is
+param1 + param2 + param3 + 'g.txt'.
+
+Last thing that I saw was important are the protections on the binary: according to the checksec command line tool it
+has full RELRO, a stack canary (as previously spotted), NX/DEP, and PIE enabled. So, this means that essentially any
+shellcode and GOT overwrites are off the table, and the memory addresses of functions and other pointers will be
+dynamic, meaning the addresses will be different each time the program is run.
+
+From my intuition, that means I should set param1 to be "f," param2 to be "l," and param3 to be "a" so that the string
+would read out 'flag.txt,' which is typically what I see a file on the remote server containing the flag to the chall
+has as its file name. So, in order to make this happen, I figured that I will have to use ROP (Return-Oriented
+Programming) to get 3 registers to supply the parameters: RDX, RSI, and RDI. I tried to see if ROPgadget had any
+gadgets that I could use to POP all the registers off, and all I could find was a pop rdi gadget (later investigating
+it, I found that the gadget did not actually exist, ROPgadget possibly misinterpreted the assembly code in
+__libc_csu_init, where it was found, but anywho that's irrelevant).
+
+
+To figure out which register should have what character, I looked into win()'s disassembled code in GDB:
+
+* Comments refer to the register values originally set before the call to win(), not its actual value at the intruction
+   0x0000000000001249 <+0>:     endbr64
+   0x000000000000124d <+4>:     push   rbp
+   0x000000000000124e <+5>:     mov    rbp,rsp
+   0x0000000000001251 <+8>:     sub    rsp,0x70
+   0x0000000000001255 <+12>:    mov    ecx,esi
+   0x0000000000001257 <+14>:    mov    eax,edx
+   0x0000000000001259 <+16>:    mov    edx,edi
+   0x000000000000125b <+18>:    mov    BYTE PTR [rbp-0x64],dl ; RDI
+   0x000000000000125e <+21>:    mov    edx,ecx
+   0x0000000000001260 <+23>:    mov    BYTE PTR [rbp-0x68],dl ; RSI
+   0x0000000000001263 <+26>:    mov    BYTE PTR [rbp-0x6c],al ; RDX
+   0x0000000000001266 <+29>:    mov    rax,QWORD PTR fs:0x28
+   0x000000000000126f <+38>:    mov    QWORD PTR [rbp-0x8],rax
+   0x0000000000001273 <+42>:    xor    eax,eax
+   0x0000000000001275 <+44>:    mov    QWORD PTR [rbp-0x4a],0x0
+   0x000000000000127d <+52>:    mov    WORD PTR [rbp-0x42],0x0
+   0x0000000000001283 <+58>:    movzx  eax,BYTE PTR [rbp-0x64] ; RDI
+   0x0000000000001287 <+62>:    mov    BYTE PTR [rbp-0x4a],al  ; RDI
+   0x000000000000128a <+65>:    movzx  eax,BYTE PTR [rbp-0x68] ; RSI
+   0x000000000000128e <+69>:    mov    BYTE PTR [rbp-0x49],al  ; RSI
+   0x0000000000001291 <+72>:    movzx  eax,BYTE PTR [rbp-0x6c] ; RDX
+   0x0000000000001295 <+76>:    mov    BYTE PTR [rbp-0x48],al  ; RDX
+   0x0000000000001298 <+79>:    mov    BYTE PTR [rbp-0x47],0x67 ; rest of the string constructed here
+   0x000000000000129c <+83>:    mov    BYTE PTR [rbp-0x46],0x2e
+   0x00000000000012a0 <+87>:    mov    BYTE PTR [rbp-0x45],0x74
+   0x00000000000012a4 <+91>:    mov    BYTE PTR [rbp-0x44],0x78
+   0x00000000000012a8 <+95>:    mov    BYTE PTR [rbp-0x43],0x74
+	[..., read the rest of the disassembly in GDB]
+
+Tracking where the values go, I figured RDI must have "f" as its value, RSI must have "l", and RDX must have "a". So, I
+kept that in my mind as time went on.
+
+My idea for the exploit to solve the chall came up in my head pretty quickly because I learned about it in a past chall
+(the pwn chall babyrop from DiceCTF 2021). If you have not heard of or done that chall before, the gist of solving it
+was to use an advanced ROP technique (at least to me it is advanced, I had a hard time figuring it out) called ret2csu.
+The idea of the technique is to take advantage of a function labelled __libc_csu_init() and use its code as gadgets
+to manipulate RDX, RSI, and RDI registers. For reference, here is a write-up that I referenced to try to craft my
+exploit: https://blog.lamarranet.com/index.php/rop-emporium-ret2csu-solution/.
+
+Now, in my head, I had a general plan to solve the chall:
+1) To bypass ASLR and PIE (the mechanisms that randomize the addresses), I can attempt to leak out the canary. In
+addition, I can attempt to leak out a memory address that I could use to calculate the base address that the binary
+relies on to offset all the code in memory. With the canary, if we perform a buffer overflow, we can go undetected in
+doing so, and ASLR and PIE work off of the offsets in the binary for the code, and we have those offsets if we look at
+the binary's memory address for its functions and other data via static analysis.
+2) Calculate the actual memory addresses with the leaks, and perform ret2csu.
+
+To perform the first step, what I did was overwrite the 10-byte buffer from getFeedback() by 1 byte (11 bytes input) so
+as to read the canary. A stack canary usually ends in a null byte (in memory it ends up being the first byte to be
+overwritten in the progrma with a buffer overflow due to little endianness), and in C, strings are read off memory
+until the program reads in a null byte. Putting those two ideas together, I found that I could just overwrite the buffer
+1 byte so as to keep the rest of the canary intact to be leaked in the output, when the program reads beyond my input.
+In my exploit script I could just tack on a null byte to get the canary. Also, a stack pointer was leaked after the
+canary (value held in the RBP), and later on I would realize it would come in handy. To leak out the memory address
+to find the base address, I overwrote my input beyond the canary and RBP to get an address in the RIP. To perform both
+leaks, I ran through two loops of getFeedback(), ensuring that I used the read(0,&local_1a,30); code to perform the leak
+and the read(0,&local_1a,90); code to reset the canary so the program can loop again (if it doesn't loop the leak of the
+RIP-held address would be in vain).
+
+After the leaks, I calulated the base address by figuring out with GDB what address was leaked and using the offset in
+the binary corresponding to the leaked address to find the base address. I then calculated the memory addresses of the
+pertinent address of the gadgets and functions that I needed to perform ret2csu.
+
+To perform ret2csu, there are 2 particular snippets of code that make the technique work (disassembly from GDB):
+
+   0x0000000000001470 <+0>:     endbr64
+   0x0000000000001474 <+4>:     push   r15
+   0x0000000000001476 <+6>:     lea    r15,[rip+0x28fb]        # 0x3d78
+   0x000000000000147d <+13>:    push   r14
+   0x000000000000147f <+15>:    mov    r14,rdx
+   0x0000000000001482 <+18>:    push   r13
+   0x0000000000001484 <+20>:    mov    r13,rsi
+   0x0000000000001487 <+23>:    push   r12
+   0x0000000000001489 <+25>:    mov    r12d,edi
+   0x000000000000148c <+28>:    push   rbp
+   0x000000000000148d <+29>:    lea    rbp,[rip+0x28ec]        # 0x3d80
+   0x0000000000001494 <+36>:    push   rbx
+   0x0000000000001495 <+37>:    sub    rbp,r15
+   0x0000000000001498 <+40>:    sub    rsp,0x8
+   0x000000000000149c <+44>:    call   0x1000 <_init>
+   0x00000000000014a1 <+49>:    sar    rbp,0x3
+   0x00000000000014a5 <+53>:    je     0x14c6 <__libc_csu_init+86>
+   0x00000000000014a7 <+55>:    xor    ebx,ebx
+   0x00000000000014a9 <+57>:    nop    DWORD PTR [rax+0x0]
+   0x00000000000014b0 <+64>:    mov    rdx,r14 ; Second gadget lies here! It will also execute the first gadget after.
+   0x00000000000014b3 <+67>:    mov    rsi,r13
+   0x00000000000014b6 <+70>:    mov    edi,r12d
+   0x00000000000014b9 <+73>:    call   QWORD PTR [r15+rbx*8] ; Caveat to the exploit, must overcome it.
+   0x00000000000014bd <+77>:    add    rbx,0x1
+   0x00000000000014c1 <+81>:    cmp    rbp,rbx
+   0x00000000000014c4 <+84>:    jne    0x14b0 <__libc_csu_init+64>
+   0x00000000000014c6 <+86>:    add    rsp,0x8
+   0x00000000000014ca <+90>:    pop    rbx ; First gadget lies here!
+   0x00000000000014cb <+91>:    pop    rbp
+   0x00000000000014cc <+92>:    pop    r12
+   0x00000000000014ce <+94>:    pop    r13
+   0x00000000000014d0 <+96>:    pop    r14
+   0x00000000000014d2 <+98>:    pop    r15
+   0x00000000000014d4 <+100>:   ret
+
+The first gadget pops off 6 registers from the stack. The parameters are to be loaded into registers r12, r13, and r14,
+as their values will be placed into RDX, RSI, and RDI as shown in the the disassembly of the second gadget. When
+running the second gadget, I had to consider what to place into RBP, RBX, and r15, as they are used to calculate an
+address to dereference to call a function from. At first, I set those values so as to try to invoke the _fini function,
+which essentially does nothing (check the disassembly of it in GDB!) because I do not want to mess up any of the values
+in all the other registers. However, I realize I would not be able to call win() after calling the second gadget due to
+the fact that the amount of bytes I could input was 90 at max. So, I then reconfigured my values to call win(). At
+first, I thought of using the addresses of pointers that pointed to the address of the offsets, but after running my
+script and wondering why it wasn't working, I realized that they were only pointing to offets and not the actual
+addresses of the functions loaded into memory (stupid PIE). So, to think up of another way to get a pointer to
+dereference, I remembered that stack pointer that I leaked from earlier. With a fat lightbulb lighting up in my head,
+I decided to have r15 to hold an address where my payload lied, and placed the address of win() in the region it
+pointed to so that it would invoke win() right after the parameter values are set. With that and some more testing in
+GDB to find the right offsets to calculate the stack address where my payload lied, I was finally able to get a working
+exploit! Once I made sure the exploit worked locally, I got on the remote server and copped the flag.
+
+If there is anything unclear about this write-up, please look at the one I pasted a link to here. Hope it helps!
+
+Flag: idek{2_guess_typos_do_matter}
+Solved by giggsterpuku
