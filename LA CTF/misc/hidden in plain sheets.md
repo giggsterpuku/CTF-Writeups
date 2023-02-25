@@ -19,7 +19,15 @@ or [2]. clicking View > Hidden sheets (1), then Show flag is listed as a greyed-
 
 ![image](https://user-images.githubusercontent.com/61215553/221341829-88955cb1-1d9a-4f9a-a92c-0a6b596c6e31.png "Hidden sheet revealed")
 
-The main tool at my disposal that I used was the Find and replace tool (shortcut is Ctrl+H). The tool allowed for me to search through all the sheets for any contents inside of them, so by playing around with it I was able to get a few characters of the flag in the flag sheet, each character seeming to be in a different cell, ranging from cells A1 to AR1 (so horizontally you can read out the flag). The caveat to using the tool was that it seems to find only the first occurrences of a character in each search, so I learned that I could specify the ranges to search through by using a filter. In the Search field of the tool, select Specific range from the drop-down menu, and on the right specify the sheet and range (i.e. flag!N1 to search a single cell in the flag sheet or Sheet1!A1:F1 to search in cells A1 to F1). With that, toying around a bit more with the tool and doing some guess andcheck, I was able to get all the characters in the flag and thus the flag itself.
+The main tool at my disposal that I used was the Find and replace tool (shortcut is Ctrl+H). The tool allowed for me to search through all the sheets for any contents inside of them, so by playing around with it I was able to get a few characters of the flag in the flag sheet, each character seeming to be in a different cell, ranging from cells A1 to AR1 (so horizontally you can read out the flag). The caveat to using the tool was that it seems to find only the first occurrences of a character in each search, so I learned that I could specify the ranges to search through by using a filter.
+
+![image](https://user-images.githubusercontent.com/61215553/221342339-26684161-5ce3-49f0-b9fe-07ac5886d732.png "The option all sheets should be selected. The flag contents are shown in the lower area circled.")
+
+In the Search field of the tool, select Specific range from the drop-down menu, and on the right specify the sheet and range (i.e. flag!N1 to search a single cell in the flag sheet or Sheet1!A1:F1 to search in cells A1 to F1).
+
+![image](https://user-images.githubusercontent.com/61215553/221342481-c7abe5a7-a5a6-40eb-bc3d-67053337dc4b.png "The option for the specified range should be selected.")
+
+With that, toying around a bit more with the tool and doing some guess andcheck, I was able to get all the characters in the flag and thus the flag itself.
 
 **Flag:** lactf{H1dd3n_&_prOt3cT3D_5h33T5_Ar3_n31th3r}
 
