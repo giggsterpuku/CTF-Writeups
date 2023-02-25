@@ -2,7 +2,7 @@
 
 **Category:** misc
 
-**Description:** I found this google sheets link on the internet. I'm sure it's hiding something, but I can't find anything? Can you find the flag? Choose any link (they're all the same): [Link 1](https://docs.google.com/spreadsheets/d/1OYx3lCccLKYgOvzxkRZ5-vAwCn3mOvGUvB4AdnSbcZ4/edit)   [Link 2](https://docs.google.com/spreadsheets/d/17A1f0z8rmR7356fcHmHTHt3Y0JMgcHlGoflADtNXeOU/edit)  [Link 3](https://docs.google.com/spreadsheets/d/1ULdm_KCOYCWuf6gqpg6tm0t-wnWySX_Bf3yUYOfZ2tw/edit)
+**Description:** I found this google sheets link on the internet. I'm sure it's hiding something, but I can't find anything? Can you find the flag? Choose any link (they're all the same): [Link 1](https://docs.google.com/spreadsheets/d/1OYx3lCccLKYgOvzxkRZ5-vAwCn3mOvGUvB4AdnSbcZ4/edit)&nbsp;&nbsp;&nbsp;&nbsp;[Link 2](https://docs.google.com/spreadsheets/d/17A1f0z8rmR7356fcHmHTHt3Y0JMgcHlGoflADtNXeOU/edit)&nbsp;&nbsp;&nbsp;&nbsp;[Link 3](https://docs.google.com/spreadsheets/d/1ULdm_KCOYCWuf6gqpg6tm0t-wnWySX_Bf3yUYOfZ2tw/edit)
 
 Really fun chall that got me thinking outside the box to get the solution. Each link leads to a Google Sheets file, and when you look at it at first, it looks like there  is one sheet with nothing relevant to finding the flag. So, the first thing I did was sift around the settings and perms that I could use to find any more information. However, there were a lot of restrictions: I only had viewer access, so no editing the sheet and its properties; I did not have the ability to download it to try to bypass any restrictions to see any other contents of the sheet on my Google Drive or locally on my laptop. I was able to find information about a hidden sheet named "flag." You can find it either doing
 
