@@ -9,7 +9,9 @@ Really fun chall that got me thinking outside the box to get the solution. Each 
 [1]. clicking Data > Protected sheets & ranges > Show all protected ranges 
 
 ![image](https://user-images.githubusercontent.com/61215553/221341974-aba9d5ba-cfe1-4204-91ab-e1181fddd418.png)
+
 ![image](https://user-images.githubusercontent.com/61215553/221342034-9c97a5e4-0f64-4617-94ff-7ca43e108f19.png)
+
 ![image](https://user-images.githubusercontent.com/61215553/221342052-eaf62d86-8789-4282-9f37-20c3d6b3c71e.png "Hidden sheet shown")
 
 
