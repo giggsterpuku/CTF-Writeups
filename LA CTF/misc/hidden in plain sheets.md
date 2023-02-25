@@ -1,4 +1,4 @@
-### Challenge: hidden in plain sheets
+## Challenge: hidden in plain sheets
 
 #### Category: misc
 
