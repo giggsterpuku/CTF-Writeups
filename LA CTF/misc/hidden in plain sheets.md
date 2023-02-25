@@ -1,6 +1,7 @@
 # Challenge: hidden in plain sheets
 
-**Category:** misc
+Category: misc
+---------
 
 **Description:** I found this google sheets link on the internet. I'm sure it's hiding something, but I can't find anything? Can you find the flag? Choose any link (they're all the same): [Link 1](https://docs.google.com/spreadsheets/d/1OYx3lCccLKYgOvzxkRZ5-vAwCn3mOvGUvB4AdnSbcZ4/edit)   [Link 2](https://docs.google.com/spreadsheets/d/17A1f0z8rmR7356fcHmHTHt3Y0JMgcHlGoflADtNXeOU/edit)  [Link 3](https://docs.google.com/spreadsheets/d/1ULdm_KCOYCWuf6gqpg6tm0t-wnWySX_Bf3yUYOfZ2tw/edit)
 
