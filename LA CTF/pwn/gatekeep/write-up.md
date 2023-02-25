@@ -5,7 +5,8 @@
 **Description:** If I gaslight you enough, you won't be able to get my flag! :)
 
 ## Breaking down the source code
-'
+`
+
 int check(){
     char input[15];
     char pass[10];
@@ -44,6 +45,7 @@ int check(){
         print_flag();
     }
 }
+
 `
 
 ## What seems to be the intended play
