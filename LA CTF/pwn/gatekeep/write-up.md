@@ -4,13 +4,14 @@
 
 **Description:** If I gaslight you enough, you won't be able to get my flag! :)
 
-## Breaking down the source code
-`
+## Breaking down the source code (with personal annotations)
 
+The main function to analyze from the source code coes from the check function:
+```c
 int check(){
-    char input[15];
-    char pass[10];
-    int access = 0;
+    char input[15]; // our input, self-explanatory
+    char pass[10]; // the buffer of the password, whcih we can overflow
+    int access = 0; // we could also just clobber this data as well
 
     // If my password is random, I can gatekeep my flag! :)
     int data = open("/dev/urandom", O_RDONLY);
@@ -21,7 +22,7 @@ int check(){
     }
     else
     {
-        ssize_t result = read(data, pass, sizeof pass);
+        ssize_t result = read(data, pass, sizeof pass); // first part of 🧀 vulnerablilty
         if (result < 0)
         {
             printf("Data not received from /dev/urandom\n");
@@ -31,9 +32,9 @@ int check(){
     close(data);
 
     printf("Password:\n");
-    gets(input);
+    gets(input); // bingo bango here is our opportunity to perform a buffer overflow
 
-    if(strcmp(input, pass)) {
+    if(strcmp(input, pass)) { // place where a simple buffer overflow should succeed if we overflow pass, second compentent to 🧀 vulnerablity
         printf("I swore that was the right password ...\n");
     }
     else {
@@ -45,10 +46,34 @@ int check(){
         print_flag();
     }
 }
-
-`
+```
 
 ## What seems to be the intended play
+
+From what I see in the source code the idea of the intended exploit is a buffer overflow. The key giveaway is that the gets() function is used, which takes in input until it reads in the newline character and can be abused to read in an arbitrary amount of characters. This may allow the program user to corrupt variables on the stack, such as the pass and access data by inputting more than the amount of characters allotted for the input (which seems like 15). From experimentation, you can see that if you flood the input with at least 28 characters of anything, the access variable is overflown and you get the flag. If you want to find out how to find the exact number of characters to input, you can check GDB and disassemble the check function. The main section of the assembly is shown here (along with my annotations):
+
+```x86asm
+   0x00000000000012e5 <+145>:   lea    rax,[rbp-0x1f] # input variable stored here
+   0x00000000000012e9 <+149>:   mov    rdi,rax
+   0x00000000000012ec <+152>:   call   0x10a0 <gets@plt>
+   0x00000000000012f1 <+157>:   lea    rdx,[rbp-0x29] # data stored here
+   0x00000000000012f5 <+161>:   lea    rax,[rbp-0x1f]
+   0x00000000000012f9 <+165>:   mov    rsi,rdx
+   0x00000000000012fc <+168>:   mov    rdi,rax
+   0x00000000000012ff <+171>:   call   0x1090 <strcmp@plt>
+   0x0000000000001304 <+176>:   test   eax,eax
+   0x0000000000001306 <+178>:   je     0x1316 <check+194>
+   0x0000000000001308 <+180>:   lea    rdi,[rip+0xd79]        # 0x2088
+   0x000000000000130f <+187>:   call   0x1030 <puts@plt>
+   0x0000000000001314 <+192>:   jmp    0x131d <check+201>
+   0x0000000000001316 <+194>:   mov    DWORD PTR [rbp-0x4],0x1 # access variable stored here
+   0x000000000000131d <+201>:   cmp    DWORD PTR [rbp-0x4],0x0
+   0x0000000000001321 <+205>:   je     0x1339 <check+229>
+   0x0000000000001323 <+207>:   lea    rdi,[rip+0xd86]        # 0x20b0
+   0x000000000000132a <+214>:   call   0x1030 <puts@plt>
+```
+
+From oberserving the disassembly, I can see that the pass data cannot actually be overwritten, as it is placed above input in the stack. Only the access variable can be overwritten. To find to offset between the variables, use the offets of the input and access variables (0x1f and 0x4, respectively) and find the difference between them, which is 27. Thus, imputting more than 27 characters overwrites the access variable, passing the check in the program and giving the flag.
 
 ## What I think is the :cheese:
 
