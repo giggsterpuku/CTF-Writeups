@@ -7,7 +7,9 @@
 The idea of the challenge is to filter out packets that have a security flag set as not evil for IPv4 and extract the data at the end of each packet. The description suggets the RFC 3514 standard, which has do with setting an "evil" bit/security flag in the flags field of the packet. If it is set to 1, the packet is "evil,"
 meaning its contents have malicious intent, and if set to 0, it is interpreted to be harmless data. To apply RFC 3514 in Wireshark, I set the preferences for the IPv4 protocol to interpret the reserved flag as the security flag. In addition, the filter I applied to filter out the not "evil" packets was ip.flags.sf == 0, and then I extracted the data field out of each packet to get the flag.
 
+![image](https://user-images.githubusercontent.com/61215553/221343050-ca5647e2-b5ce-4c63-bc6a-9486672817fe.png "The text highlighted in blue shows where the characters of the flag should show up.")
 
 
-Flag: lactf{3V1L_817_3xf1l7R4710N_4_7H3_W1N_51D43c8000034d0c}
+**Flag:** lactf{3V1L_817_3xf1l7R4710N_4_7H3_W1N_51D43c8000034d0c}
+
 Solved by giggsterpuku
