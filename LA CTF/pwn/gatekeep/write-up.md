@@ -2,6 +2,8 @@
 
 **Category:** pwn
 
+**Description:** If I gaslight you enough, you won't be able to get my flag! :)
+
 ## Breaking down the source code
 
 
