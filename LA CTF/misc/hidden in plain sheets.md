@@ -27,7 +27,7 @@ In the Search field of the tool, select Specific range from the drop-down menu, 
 
 ![image](https://user-images.githubusercontent.com/61215553/221342481-c7abe5a7-a5a6-40eb-bc3d-67053337dc4b.png "The option for the specified range should be selected.")
 
-With that, toying around a bit more with the tool and doing some guess andcheck, I was able to get all the characters in the flag and thus the flag itself.
+With that, toying around a bit more with the tool and doing some guess and check, I was able to get all the characters in the flag and thus the flag itself.
 
 **Flag:** lactf{H1dd3n_&_prOt3cT3D_5h33T5_Ar3_n31th3r}
 
