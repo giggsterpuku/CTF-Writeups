@@ -1,5 +1,7 @@
 Challenge: hidden in plain sheets
+
 Category: misc
+
 Description: I found this google sheets link on the internet. I'm sure it's hiding something, but I can't find
 anything? Can you find the flag?
 Choose any link (they're all the same):
