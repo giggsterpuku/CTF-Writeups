@@ -6,9 +6,9 @@
 
 ### Hints:
 
-####1. CoreWars is a well-established game with a lot of docs and strategy
+#### 1. CoreWars is a well-established game with a lot of docs and strategy
 
-####2. Experiment with input to the CoreWars handler or create a self-defeating bot
+#### 2. Experiment with input to the CoreWars handler or create a self-defeating bot
 
 Gist: Run a NOP instruction to do basically nothing to easily terminate your process. The Imp will continue to run due to its MOV instruction, allowing it to win all trials.
 
