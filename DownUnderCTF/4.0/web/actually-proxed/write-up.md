@@ -1,10 +1,10 @@
-###Challenge: actually-proxed
+### Challenge: actually-proxed
 
-####Category: web
+#### Category: web
 
-####Description: Still cool haxxorz only!!! Except this time I added in a reverse proxy for extra security. Nginx and the standard library proxy are waaaayyy too slow (amateurs). So I wrote my own :D
+#### Description: Still cool haxxorz only!!! Except this time I added in a reverse proxy for extra security. Nginx and the standard library proxy are waaaayyy too slow (amateurs). So I wrote my own :D
 
-####Author: Jordan Bertasso
+#### Author: Jordan Bertasso
 
 I first solved the challenge out of making an idea aobut the vulnerability, then I looked back at the source code to confirm where the vulnerability was. Going into this challenge, I knew from the supposedly prequel to this challenge "proxed" that the gist of that challenge was to mask your IP to be the desired one that the web server will give the flag to by filling in the HTTP request header field X-Forwarded-For with the desired IP address. Here, the server source code is the same:
 
@@ -36,6 +36,6 @@ It turns out that one of the X-Forwarded-For fields that I sent actually has its
 
 Here is my cURL payload: curl proxed.duc.tf:30009 -H "X-Forwarded-For: 31.33.33.7" -H "X-Forwarded-For: 31.33.33.7"
 
-####Flag: DUCTF{y0ur_c0d3_15_n07_b3773r_7h4n_7h3_574nd4rd_l1b}
+#### Flag: DUCTF{y0ur_c0d3_15_n07_b3773r_7h4n_7h3_574nd4rd_l1b}
 
 Solved by giggsterpuku
