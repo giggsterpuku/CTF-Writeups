@@ -1,10 +1,10 @@
-###Challenge: one byte
+### Challenge: one byte
 
-####Category: pwn
+#### Category: pwn
 
-####Description: Here's a one byte buffer overflow!
+#### Description: Here's a one byte buffer overflow!
 
-####Author: joseph
+#### Author: joseph
 
 This was a challenge that I can say I learned a lot from, credits to the challenge author for a slightly difficult yet good challenge.
 
@@ -41,6 +41,6 @@ From here, I began to Google, and I found a few articles that helped me, one bei
 
 According to the articles I read up on, challenge solvers were able to use GDB to find what byte to set the least significant byte to in the RBP for the exploit to work, but when I tried what they did, I found that it didn't work. My next realization was that the binary provided implemented the **P**osition-**I**ndependent **E**xecutable (**PIE**) mechanism. What the mechnism does is that the memory addresses of the stack and instructions are always randomized so that the relative offets between some addresses were not so predictable. Therefore, when I tried to use the same byte to overwrite the least significant byte in the RBP, it wouldn't work. What I ended up figuring out is that this exploit would be a hit-or-miss: sometimes it would work, sometimes not, depending on the randomized state of the memory the program is loaded on. So, I had the script run multiple times and had the win() address written in the payload as many times as I could in the buffer (4 times) to increase the likelihood of the win() address becoming the return address. With that, I finally cracked the challenge and got the flag with the spawned shell from win().
 
-####Flag: DUCTF{all_1t_t4k3s_is_0n3!}
+#### Flag: DUCTF{all_1t_t4k3s_is_0n3!}
 
 Solved by giggsterpuku
