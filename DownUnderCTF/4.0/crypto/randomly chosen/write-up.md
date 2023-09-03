@@ -1,10 +1,10 @@
-###Challenge: randomly chosen
+### Challenge: randomly chosen
 
-####Category: crypto
+#### Category: crypto
 
-####Description: Can you recover the flag from this random jumble of characters?
+#### Description: Can you recover the flag from this random jumble of characters?
 
-####Author: joseph
+#### Author: joseph
 
 Looking into the source code to generate the output, it looks like there may be no way to solve the challenge, at least to some CTF beginners:
 
@@ -21,6 +21,6 @@ Essentially, the plaintext that is the flag is randomized into different positio
 
 For me, the main struggle was how to find the seed. The way I found it was to iteratively run through a list of potential candidates for the seed and whittle down the list until one option remains. To whittle down the list, at each iteration of candidates to go through, I checked to see if a certain character in a resulting test string, when a given string is run through the randomization, shows up in the same position as it does in the ciphertext. The test string was modeled to be similar to the flag format, with 305 // 5 = 61 characters in length. From there, it was a matter of figuring out how to code the mapping of the ciphertext characters back to order of which the flag characters are.
 
-####Flag: DUCTF{is_r4nd0mn3ss_d3t3rm1n1st1c?_cba67ea78f19bcaefd9068f1a}
+#### Flag: DUCTF{is_r4nd0mn3ss_d3t3rm1n1st1c?_cba67ea78f19bcaefd9068f1a}
 
 Solved by giggsterpuku
